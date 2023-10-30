@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj": {}
+    "D:\\Doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj": {}
   },
   "projects": {
-    "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj": {
+    "D:\\Doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj",
+        "projectUniqueName": "D:\\Doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj",
         "projectName": "QL_MuaBanMayTinhvaPhuKien",
-        "projectPath": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\obj\\",
+        "projectPath": "D:\\Doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien.csproj",
+        "packagesPath": "C:\\Users\\THANG\\.nuget\\packages\\",
+        "outputPath": "D:\\Doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\THANG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

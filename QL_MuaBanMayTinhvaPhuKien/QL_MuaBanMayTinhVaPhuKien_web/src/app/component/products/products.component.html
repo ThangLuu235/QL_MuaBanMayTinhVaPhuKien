@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Sản phẩm</h1>
+  <table class="table" *ngIf="products && products.length>0">
+    <thead>
+      <tr>
+        <th scope="col">Mã Sản Phẩm </th>
+        <th scope="col">Tên Sản Phẩm</th>
+        <th scope="col">Nhà sản xuất</th>
+        <th scope="col">Danh mục</th>
+        <th scope="col">Mô tả</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Số lượng tồn kho</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <th>{{product.maSP}}</th>
+        <td>{{product.tenSanPham}}</td>
+        <td>{{product.maNSX}}</td>
+        <td>{{product.maDM}}</td>
+        <td>{{product.moTa}}</td>
+        <td>{{product.gia}}</td>
+        <td>{{product.soLuongTrongKho}}</td>
+      </tr>
+    </tbody>
+    <p *ngIf="!products || products.length== 0">Không tìm thấy sản phẩm</p>
+  </table>
+</div>
