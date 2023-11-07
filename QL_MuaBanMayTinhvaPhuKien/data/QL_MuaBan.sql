@@ -1,48 +1,38 @@
-﻿create database QL_CHMayTinh
-go
-use QL_CHMayTinh
-go
+﻿CREATE DATABASE QL_CHMayTinh
+GO
+
+USE QL_CHMayTinh
+GO
+
 -- Tạo bảng Danh mục sản phẩm
 CREATE TABLE DanhMucSanPham (
     MaDM NVARCHAR(50) PRIMARY KEY NOT NULL,
     TenDanhMuc NVARCHAR(255)
 );
 
--- Tạo bảng thông số kỹ thuật
-CREATE TABLE ThongSoSanPham (
-	MaThongSo NVARCHAR(50) PRIMARY KEY NOT NULL,
-	CPU NVARCHAR(255),
-	ManHinh NVARCHAR(255),
-	Ram NVARCHAR(255),
-	DoHoa NVARCHAR(50),
-	LuuTru NVARCHAR(50),
-	HeDieuHanh NVARCHAR(50),
-	Pin NVARCHAR(50),
-	KhoiLuong NVARCHAR(50),
-	Mau NVARCHAR(50),
-	SoSeri NVARCHAR(50),
-	SoLuongTon INT
-);
-
--- Tạo bảng Nhà sản xuất
-CREATE TABLE NhaSanXuat (
-    MaNSX NVARCHAR(50) PRIMARY KEY NOT NULL,
-    TenNhaSanXuat NVARCHAR(255),
-    DiaChi NVARCHAR(255),
-    DienThoai NVARCHAR(20)
-);
 
 -- Tạo bảng Sản phẩm
 CREATE TABLE SanPham (
     MaSP NVARCHAR(50) PRIMARY KEY NOT NULL,
     TenSanPham NVARCHAR(255),
-    MaNSX NVARCHAR(50),
-    MaDM NVARCHAR(50),
+    
     MoTa NVARCHAR(150),
     Gia DECIMAL(10, 2),
-    SoLuongTrongKho INT,
-	HinhAnh nvarchar(50),
-	MaThongSo NVARCHAR(50)
+	HinhAnh NVARCHAR(50),
+);
+
+-- Tạo bảng thông số kỹ thuật
+CREATE TABLE ThongSoKyThuat (
+	MaThongSo NVARCHAR(50) PRIMARY KEY NOT NULL,
+	TenThongSo NVARCHAR(100),
+);
+
+-- Tạo bảng thông số - sản phẩm
+CREATE TABLE ThongSoSanPham (
+	MaTP NVARCHAR(50),
+	MaThongSo NVARCHAR(50),
+	GiaTriThongSo NVARCHAR(100),
+	PRIMARY KEY (MaTP, MaThongSo)
 );
 
 -- Tạo bảng Chức vụ
@@ -62,6 +52,17 @@ CREATE TABLE NhanVien (
     MaChucVu NVARCHAR(50)
 );
 
+-- Tạo bảng tình trạng thanh toán
+CREATE TABLE TinhTrangThanhToan (
+	MaTinhTrangTT NVARCHAR(50) PRIMARY KEY NOT NULL,
+	MaNV NVARCHAR(50),
+	DatHang NVARCHAR(50),
+	XacNhanDonHang NVARCHAR(50),
+	NgayThanhToan DATE,
+	TinhTrang NVARCHAR(50),
+	GiaoHang NVARCHAR(50)
+);
+
 -- Tạo bảng KhachHang
 CREATE TABLE KhachHang (
     MaKH NVARCHAR(50) PRIMARY KEY NOT NULL,
@@ -73,14 +74,22 @@ CREATE TABLE KhachHang (
     Email NVARCHAR(255)
 );
 
+-- Tạo bảng Khuyến mãi
+CREATE TABLE KhuyenMai (
+	MaKhuyenMai NVARCHAR(50) PRIMARY KEY NOT NULL,
+	MaSP NVARCHAR(50),
+	TenKhuyenMai NVARCHAR(100),
+	PhanTramGiamGia DECIMAL(5, 2)
+);
+
 -- Tạo bảng Hóa đơn
 CREATE TABLE HoaDon (
     MaHD NVARCHAR(50) PRIMARY KEY NOT NULL,
     NgayMua DATE,
     MaKH NVARCHAR(50),
     TongTien DECIMAL(10, 2),
-    TinhTrangThanhToan NVARCHAR(50),
-	NgayThanhToan DATE,
+	HinhThucThanhToan NVARCHAR(30),
+    MaTinhTrangTT NVARCHAR(50),
 	NgayNhanHang DATE
 );
 
@@ -90,23 +99,8 @@ CREATE TABLE ChiTietHoaDon (
     MaHD NVARCHAR(50),
     MaSP NVARCHAR(50),
     SoLuong INT,
-    GiaBan DECIMAL(10, 2)
-);
-
--- Tạo bảng Đơn hàng
-CREATE TABLE DonHang (
-    MaDH NVARCHAR(50) PRIMARY KEY NOT NULL,
-    NgayDatHang DATE,
-    MaKhachHang NVARCHAR(50)
-);
-
--- Tạo bảng Chi tiết đơn hàng
-CREATE TABLE ChiTietDonHang (
-    MaCTDH NVARCHAR(50) PRIMARY KEY NOT NULL,
-    MaDH NVARCHAR(50),
-    MaSP NVARCHAR(50),
-    SoLuong INT,
-    GiaBan DECIMAL(10, 2)
+    GiaBan DECIMAL(10, 2),
+	MaKhuyenMai NVARCHAR(50)
 );
 
 -- Tạo bảng Nhà cung cấp
@@ -121,7 +115,7 @@ CREATE TABLE NhaCungCap (
 CREATE TABLE CungUng (
 	MaCungUng NVARCHAR(50) PRIMARY KEY NOT NULL,
 	MaNCC NVARCHAR(50),
-	MaSP NVARCHAR(50),
+	MaTP NVARCHAR(50),
 	SoLuong INT,
 	GiaBan DECIMAL(10, 2),
 	NgayDatHang DATE,
@@ -139,45 +133,39 @@ CREATE TABLE DonDatHang (
 CREATE TABLE ChiTietDonDatHang (
     MaCTDDH NVARCHAR(50) PRIMARY KEY NOT NULL,
     MaDDH NVARCHAR(50),
-    MaSP NVARCHAR(50),
+    MaTP NVARCHAR(50),
     SoLuongDat INT,
     GiaDat DECIMAL(10, 2)
 );
+CREATE TABLE ThanhPhan
+(
+	MaTP nvarchar(50) primary key NOT NULL,
+	TenTP nvarchar(300),
+	SoLuongTonKho int,
+	SoSeri nvarchar(100),
+	GiaTP decimal(10,2),
+	MaDM NVARCHAR(50),
+)
 
--- Tạo bảng Phiếu bảo hành
-CREATE TABLE PhieuBaoHanh (
-    MaPBH NVARCHAR(50) PRIMARY KEY NOT NULL,
-    NgayYeuCau DATE,
-    MaSP NVARCHAR(50),
-    MoTaLoi NVARCHAR(150),
-    TinhTrangXuLy NVARCHAR(50)
-);
-
--- Tạo bảng Giỏ hàng
-CREATE TABLE GioHang (
-    MaGH NVARCHAR(50) PRIMARY KEY NOT NULL,
-    MaKH NVARCHAR(50),
-    ThoiGianThemVaoGio DATETIME
-);
-
--- Tạo bảng Chi tiết giỏ hàng
-CREATE TABLE ChiTietGioHang (
-    MaCTGH NVARCHAR(50) PRIMARY KEY NOT NULL,
-    MaGH NVARCHAR(50),
-    MaSP NVARCHAR(50),
-    SoLuong INT,
-    GiaBan DECIMAL(10, 2)
-);
+CREATE TABLE SanPhamThanhPhan
+(
+	MaSP nvarchar(50),
+	MaTP nvarchar(50),
+	SoLuong int,
+	primary key (MaSP,MaTP)
+)
 
 -- Tạo ràng buộc khóa ngoại từ bảng SanPham đến DanhMucSanPham và NhaSanXuat
-ALTER TABLE SanPham
+ALTER TABLE ThanhPhan
 ADD FOREIGN KEY (MaDM) REFERENCES DanhMucSanPham(MaDM);
 
-ALTER TABLE SanPham
-ADD FOREIGN KEY (MaThongSo) REFERENCES ThongSoSanPham(MaThongSo)  
 
-ALTER TABLE SanPham
-ADD FOREIGN KEY (MaNSX) REFERENCES NhaSanXuat(MaNSX);
+-- Tạo ràng buộc khoá ngoại từ bảng Thông số - sản phẩm đến SanPham và Thông số kỹ thuật
+ALTER TABLE ThongSoSanPham
+ADD FOREIGN KEY (MaTP) REFERENCES ThanhPhan(MaTP);
+
+ALTER TABLE ThongSoSanPham
+ADD FOREIGN KEY (MaThongSo) REFERENCES ThongSoKyThuat(MaThongSo);
 
 -- Tạo ràng buộc khóa ngoại từ bảng NhanVien đến ChucVu
 ALTER TABLE NhanVien
@@ -187,27 +175,26 @@ ADD FOREIGN KEY (MaChucVu) REFERENCES ChucVu(MaChucVu);
 ALTER TABLE HoaDon
 ADD FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH);
 
--- Tạo ràng buộc khóa ngoại từ bảng ChiTietHoaDon đến HoaDon và SanPham
+ALTER TABLE HoaDon
+ADD FOREIGN KEY (MaTinhTrangTT) REFERENCES TinhTrangThanhToan(MaTinhTrangTT);
+
+-- Tạo ràng buộc khoá ngoại từ bảng Tình trạng thanh toán đến Nhân viên
+ALTER TABLE TinhTrangThanhToan
+ADD FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV);
+
+-- Tạo ràng buộc khóa ngoại từ bảng ChiTietHoaDon đến HoaDon và SanPham và KhuyenMai
 ALTER TABLE ChiTietHoaDon
 ADD FOREIGN KEY (MaHD) REFERENCES HoaDon(MaHD);
 
 ALTER TABLE ChiTietHoaDon
 ADD FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP);
 
--- Tạo ràng buộc khóa ngoại từ bảng DonHang đến KhachHang
-ALTER TABLE DonHang
-ADD FOREIGN KEY (MaKhachHang) REFERENCES KhachHang(MaKH);
-
--- Tạo ràng buộc khóa ngoại từ bảng ChiTietDonHang đến DonHang và SanPham
-ALTER TABLE ChiTietDonHang
-ADD FOREIGN KEY (MaDH) REFERENCES DonHang(MaDH);
-
-ALTER TABLE ChiTietDonHang
-ADD FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP);
+ALTER TABLE ChiTietHoaDon
+ADD FOREIGN KEY (MaKhuyenMai) REFERENCES KhuyenMai(MaKhuyenMai);
 
 -- Tạo ràng buộc khoá ngoại từ bảng CungUng đến bảng NhaCungCap và SanPham
 ALTER TABLE CungUng
-ADD FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP);
+ADD FOREIGN KEY (MaTP) REFERENCES ThanhPhan(MaTP);
 
 ALTER TABLE CungUng
 ADD FOREIGN KEY (MaNCC) REFERENCES NhaCungCap(MaNCC);
@@ -221,22 +208,12 @@ ALTER TABLE ChiTietDonDatHang
 ADD FOREIGN KEY (MaDDH) REFERENCES DonDatHang(MaDDH);
 
 ALTER TABLE ChiTietDonDatHang
+ADD FOREIGN KEY (MaTP) REFERENCES ThanhPhan(MaTP);
+-- Tạo ràng buộc khóa ngoại từ bảng SanPhamThanhPhan đến ThanhPhan và SanPham
+ALTER TABLE SanPhamThanhPhan
 ADD FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP);
-
--- Tạo ràng buộc khóa ngoại từ bảng PhieuBaoHanh đến SanPham
-ALTER TABLE PhieuBaoHanh
-ADD FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP);
-
--- Tạo ràng buộc khóa ngoại từ bảng GioHang đến KhachHang
-ALTER TABLE GioHang
-ADD FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH);
-
--- Tạo ràng buộc khóa ngoại từ bảng ChiTietGioHang đến GioHang và SanPham
-ALTER TABLE ChiTietGioHang
-ADD FOREIGN KEY (MaGH) REFERENCES GioHang(MaGH);
-
-ALTER TABLE ChiTietGioHang
-ADD FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP);
+ALTER TABLE SanPhamThanhPhan
+ADD FOREIGN KEY (MaTP) REFERENCES ThanhPhan(MaTP);
 
 
 -- Nhập dữ liệu
@@ -245,20 +222,38 @@ INSERT [dbo].[DanhMucSanPham] ([MaDM], [TenDanhMuc]) VALUES ('DM001', N'Laptop')
 INSERT [dbo].[DanhMucSanPham] ([MaDM], [TenDanhMuc]) VALUES ('DM002', N'PC - Máy tính bộ')
 INSERT [dbo].[DanhMucSanPham] ([MaDM], [TenDanhMuc]) VALUES ('DM003', N'Phụ kiện')
 
--- Bảng Thông số sản phẩm
-INSERT [dbo].[ThongSoSanPham] ([MaThongSo], [CPU], [ManHinh], [Ram], [DoHoa], [LuuTru], [HeDieuHanh], [Pin], [KhoiLuong], [Mau], [SoSeri], [SoLuongTon]) VALUES ('TS01', N'AMD Ryzen 5 7520U', N'15.6 (1920 x 1080)', N'16GB Onboard LPDDR5 5500MHz', N'Onboard AMD Radeon 610M', N'512GB SSD M.2 NVMe /', N'Windows 11 Home', N'3 cell 42 Wh Pin liền', N'1.8kg', N'Đen', N'1458201A', 20)
-INSERT [dbo].[ThongSoSanPham] ([MaThongSo], [CPU], [ManHinh], [Ram], [DoHoa], [LuuTru], [HeDieuHanh], [Pin], [KhoiLuong], [Mau], [SoSeri], [SoLuongTon]) VALUES ('TS02', N'Intel Core i5-13500HX', N'16 IPS (1920 x 1200),165Hz', N'2 x 8GB DDR5 4800MHz', N'RTX 4060 8GB GDDR6 / Intel UHD Graphics 710', N'512GB SSD M.2 NVMe /', N'Windows 11 Home', N'4 cell 90 Wh Pin liền', N'2.6kg', N'Đen', N'1478201A', 30)
-INSERT [dbo].[ThongSoSanPham] ([MaThongSo], [CPU], [ManHinh], [Ram], [DoHoa], [LuuTru], [HeDieuHanh], [Pin], [KhoiLuong], [Mau], [SoSeri], [SoLuongTon]) VALUES ('TS03', N'Intel Core i5-1335U', N'15.6 WVA (1920 x 1080),120Hz', N'1 x 8GB DDR4 2666MHz', N'Onboard Intel Iris Xe Graphics', N'256GB SSD M.2 NVMe /', N'Windows 11 Home SL + Office Home & Student 2021', N'3 cell 41 Wh Pin liền', N'1.6kg', N'Đen', N'1458101A', 10)
-
 -- Bảng nhà sản xuất
-INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX01', N'Nhà sản xuất ASUS', N'TP.HCM', N'02856974895')
-INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX02', N'Nhà sản xuất ACER', N'TP.HCM', N'02857974895')
-INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX03', N'Nhà sản xuất DELL', N'TP.HCM', N'02856978895')
-
+--INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX01', N'Nhà sản xuất ASUS', N'TP.HCM', N'02856974895')
+--INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX02', N'Nhà sản xuất ACER', N'TP.HCM', N'02857974895')
+--INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX03', N'Nhà sản xuất DELL', N'TP.HCM', N'02856978895')
+select * from SanPham
 -- Bảng sản phẩm
-INSERT [dbo].[SanPham] ([MaSP], [TenSanPham], [MaNSX], [MaDM], [MoTa], [Gia], [SoLuongTrongKho], [HinhAnh], [MaThongSo]) VALUES ('SP001', N'Laptop ASUS Vivobook Go 15', N'NSX01', N'DM001', N'Asus VivoBook Go 15 siêu mỏng nhẹ', 13490000, 20, N'Anh1', 'TS01')
-INSERT [dbo].[SanPham] ([MaSP], [TenSanPham], [MaNSX], [MaDM], [MoTa], [Gia], [SoLuongTrongKho], [HinhAnh], [MaThongSo]) VALUES ('SP002', N'Laptop ACER', N'NSX02', N'DM001', N'Siêu Nhanh', 15490000, 30, N'Anh1', 'TS02')
-INSERT [dbo].[SanPham] ([MaSP], [TenSanPham], [MaNSX], [MaDM], [MoTa], [Gia], [SoLuongTrongKho], [HinhAnh], [MaThongSo]) VALUES ('SP003', N'Laptop Dell Vostro 3530', N'NSX03', N'DM001', N'Siêu nhẹ, siêu mỏng', 30000000, 10, N'Anh1', 'TS03')
+INSERT [dbo].[SanPham] ([MaSP], [TenSanPham],  [MoTa], [Gia], [HinhAnh]) VALUES ('SP001', N'Laptop ASUS Vivobook Go 15', N'Asus VivoBook Go 15 siêu mỏng nhẹ', 13490000, N'Anh1')
+INSERT [dbo].[SanPham] ([MaSP], [TenSanPham],  [MoTa], [Gia],  [HinhAnh]) VALUES ('SP002', N'Laptop ACER Aspire 3 A315-59-51X8', N'Siêu Nhanh', 15490000, N'Anh2')
+INSERT [dbo].[SanPham] ([MaSP], [TenSanPham],  [MoTa], [Gia],  [HinhAnh]) VALUES ('SP003', N'Laptop Dell Vostro 3530', N'Siêu nhẹ, siêu mỏng', 30000000, N'Anh3')
+
+-- Bảng Thông số kỹ thuật
+INSERT [dbo].[ThongSoKyThuat] ([MaThongSo], [TenThongSo]) VALUES ('TS01', N'CPU')
+INSERT [dbo].[ThongSoKyThuat] ([MaThongSo], [TenThongSo]) VALUES ('TS02', N'Màn hình')
+INSERT [dbo].[ThongSoKyThuat] ([MaThongSo], [TenThongSo]) VALUES ('TS03', N'RAM')
+
+--Bảng thành phần
+insert into ThanhPhan values ('LAPTOP001',N'Laptop ASUS Vivobook Go 15',30,'LAP-AS-VI-123123',13000000,'DM001')
+insert into ThanhPhan values ('LAPTOP002',N'Laptop ACER Aspire 3 A315-59-51X8',40,'LAP-AC-AS-565423',15000000,'DM001')
+insert into ThanhPhan values ('LAPTOP003',N'Laptop Dell Vostro 3530',50,'LAP-DE-VO-342645',29000000,'DM001')
+insert into ThanhPhan values ('CHUOT001',N'Chuột Logitech B100',200,'MOU-LO-938421',100000,'DM003')
+insert into ThanhPhan values ('BANPHIM001',N'Bàn phím HP',100,'KEY-HP-389231',200000,'DM003')
+insert into ThanhPhan values ('PHUKIEN001',N'Bao chống sốc laptop',500,'PK-38892',50000,'DM003')
+-- Bảng Thông số - sản phẩm
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP001', 'TS01', N'AMD Ryzen 5 7520U')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP001', 'TS02', N'15.6" (1920 x 1080)')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP001', 'TS03', N'16GB Onboard LPDDR5 5500MHz')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP002', 'TS01', N'Intel Core i5-1235U')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP002', 'TS02', N'15.6" (1920 x 1080)')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP002', 'TS03', N'1 x 8GB DDR4 2400MHz')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP003', 'TS01', N'Intel Core i5-1335U')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP003', 'TS02', N'15.6" WVA (1920 x 1080),120Hz')
+INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP003', 'TS03', N'1 x 8GB DDR4 2666MHz')
 
 -- Bảng chức vụ
 INSERT [dbo].[ChucVu] ([MaChucVu], [TenChucVu]) VALUES ('CVBH', N'Nhân viên bán hàng')
@@ -270,34 +265,31 @@ INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKh
 INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKhau], [MaChucVu]) VALUES ('NV002', N'Nguyễn Văn Thông', N'TP.HCM', '0387652014', 'thongthai@gmail.com', '12345678N', 'CVBH')
 INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKhau], [MaChucVu]) VALUES ('NV003', N'Trần Hoàng Lâm', N'TP.HCM', '0878952074', 'lamhoang@gmail.com', '12345678N', 'CVK')
 
+-- Bảng tình trạng thanh toán
+SET DATEFORMAT DMY
+INSERT [dbo].[TinhTrangThanhToan] ([MaTinhTrangTT], [MaNV], [DatHang], [XacNhanDonHang], [NgayThanhToan], [TinhTrang], [GiaoHang]) VALUES ('TT001', 'NV002', N'Đã đặt hàng', N'Đã xác nhận', '14/05/2022', N'Đã Thanh Toán', N'Đã giao')
+INSERT [dbo].[TinhTrangThanhToan] ([MaTinhTrangTT], [MaNV], [DatHang], [XacNhanDonHang], [NgayThanhToan], [TinhTrang], [GiaoHang]) VALUES ('TT002', 'NV002', N'Đã đặt hàng', N'Đã xác nhận', '14/06/2022', N'Đã Thanh Toán', N'Đã giao')
+INSERT [dbo].[TinhTrangThanhToan] ([MaTinhTrangTT], [MaNV], [DatHang], [XacNhanDonHang], [NgayThanhToan], [TinhTrang], [GiaoHang]) VALUES ('TT003', 'NV002', N'Đã đặt hàng', N'Đã xác nhận', '21/06/2022', N'Đã Thanh Toán', N'Đã giao')
+
 -- Bảng khách hàng
 SET DATEFORMAT DMY
 INSERT [dbo].[KhachHang] ([MaKH], [TenKhachHang], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH001', N'Trần Ngọc Đài', N'Nữ', '16/01/2001', N'TP.HCM', '0247896547', 'daingoctran@gmail.com')
 INSERT [dbo].[KhachHang] ([MaKH], [TenKhachHang], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH002', N'Nguyễn Thị Bích Thuỷ', N'Nữ', '26/12/2012', N'TP.HCM', '0847896547', 'bichthuy@gmail.com')
 INSERT [dbo].[KhachHang] ([MaKH], [TenKhachHang], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH003', N'Đào Văn Lưu', N'Nam', '18/11/1999', N'TP.HCM', '0247896790', 'cyberfort@gmail.com')
 
+-- Bảng khuyến mãi
+INSERT [dbo].[KhuyenMai] ([MaKhuyenMai], [MaSP], [TenKhuyenMai], [PhanTramGiamGia]) VALUES ('KM001', 'SP002', N'Kỷ niệm ngày thành lập', 8.88)
+
 -- Bảng hoá đơn
 SET DATEFORMAT DMY
-INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [TinhTrangThanhToan], [NgayThanhToan], [NgayNhanHang]) VALUES ('HD001', '14/05/2022', 'KH001', 13490000, N'Đã thanh toán', '14/05/2022', '20/05/2022')
-INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [TinhTrangThanhToan], [NgayThanhToan], [NgayNhanHang]) VALUES ('HD002', '14/06/2022', 'KH002', 15490000, N'Đã thanh toán', '20/06/2022', '20/06/2022')
-INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [TinhTrangThanhToan], [NgayThanhToan], [NgayNhanHang]) VALUES ('HD003', '21/04/2022', 'KH003', 30000000, N'Đã thanh toán', '21/04/2022', '21/04/2022')
-
+INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [HinhThucThanhToan], [MaTinhTrangTT], [NgayNhanHang]) VALUES ('HD001', '14/05/2022', 'KH001', 13490000, N'Thẻ tín dụng', 'TT001', '20/05/2022')
+INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [HinhThucThanhToan], [MaTinhTrangTT], [NgayNhanHang]) VALUES ('HD002', '14/06/2022', 'KH001', 13490000, N'Tiền mặt', 'TT002', '20/06/2022')
+INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [HinhThucThanhToan], [MaTinhTrangTT], [NgayNhanHang]) VALUES ('HD003', '21/06/2022', 'KH001', 13490000, N'Thẻ tín dụng', 'TT003', '21/06/2022')
 
 -- Bảng chi tiết hoá dơn
 INSERT [dbo].[ChiTietHoaDon] ([MaCTHD], [MaHD], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTHD001', 'HD001', 'SP001', 1, 13490000)
 INSERT [dbo].[ChiTietHoaDon] ([MaCTHD], [MaHD], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTHD002', 'HD002', 'SP002', 1, 15490000)
 INSERT [dbo].[ChiTietHoaDon] ([MaCTHD], [MaHD], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTHD003', 'HD003', 'SP003', 1, 30000000)
-
-
--- Bảng đơn hàng
-INSERT [dbo].[DonHang] ([MaDH], [NgayDatHang], [MaKhachHang]) VALUES ('DH001', '14/05/2022', 'KH001')
-INSERT [dbo].[DonHang] ([MaDH], [NgayDatHang], [MaKhachHang]) VALUES ('DH002', '14/06/2022', 'KH002')
-INSERT [dbo].[DonHang] ([MaDH], [NgayDatHang], [MaKhachHang]) VALUES ('DH003', '21/04/2022', 'KH003')
-
--- Bảng chi tiết đơn hàng
-INSERT [dbo].[ChiTietDonHang] ([MaCTDH], [MaDH], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTDH001', 'DH001', 'SP001', 1, 13490000)
-INSERT [dbo].[ChiTietDonHang] ([MaCTDH], [MaDH], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTDH002', 'DH002', 'SP002', 1, 15490000)
-INSERT [dbo].[ChiTietDonHang] ([MaCTDH], [MaDH], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTDH003', 'DH003', 'SP003', 1, 30000000)
 
 -- Bảng nhà cung cấp
 INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNhaCungCap], [DiaChi], [DienThoai]) VALUES ('NCC001', N'Công Ty Phân Phối A', N'TP.HCM', '0287896244')
@@ -306,9 +298,9 @@ INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNhaCungCap], [DiaChi], [DienThoai]) VALU
 
 -- Bảng cung ứng
 SET DATEFORMAT DMY
-INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaSP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG001','NCC001', 'SP001', 20, 13490000, '20/02/2022', '03/03/2022')
-INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaSP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG002','NCC002', 'SP002', 20, 15490000, '20/02/2022', '01/03/2022')
-INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaSP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG003','NCC003', 'SP003', 20, 30000000, '20/02/2022', '09/03/2022')
+INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaTP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG001','NCC001', 'LAPTOP001', 20, 13490000, '20/02/2022', '03/03/2022')
+INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaTP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG002','NCC002', 'LAPTOP002', 20, 15490000, '20/02/2022', '01/03/2022')
+INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaTP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG003','NCC003', 'LAPTOP003', 20, 30000000, '20/02/2022', '09/03/2022')
 
 -- Bảng đơn đặt hàng
 SET DATEFORMAT DMY
@@ -317,26 +309,24 @@ INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDatHang], [MaNhaCungCap]) VALUES ('DDH0
 INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDatHang], [MaNhaCungCap]) VALUES ('DDH003', '20/02/2022', 'NCC003')
 
 -- Bảng chi tiết đơn đăt hàng
-INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaSP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH001', 'DDH001', 'SP001', 20, 13000000)
-INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaSP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH002', 'DDH002', 'SP002', 20, 15000000)
-INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaSP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH003', 'DDH003', 'SP003', 20, 29000000)
+INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaTP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH001', 'DDH001', 'LAPTOP001', 20, 13000000)
+INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaTP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH002', 'DDH002', 'LAPTOP002', 20, 15000000)
+INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaTP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH003', 'DDH003', 'LAPTOP003', 20, 29000000)
 
--- Bảng phiếu bảo hành
-SET DATEFORMAT DMY
-INSERT [dbo].[PhieuBaoHanh] ([MaPBH], [NgayYeuCau], [MaSP], [MoTaLoi], [TinhTrangXuLy]) VALUES ('PBH001', '14/07/2022', 'SP001', N'Lỗi phần loa ngoài nhỏ', 'Đã xong')
-INSERT [dbo].[PhieuBaoHanh] ([MaPBH], [NgayYeuCau], [MaSP], [MoTaLoi], [TinhTrangXuLy]) VALUES ('PBH002', '12/08/2022', 'SP002', N'Lỗi phần mềm', 'Đã xong')
-INSERT [dbo].[PhieuBaoHanh] ([MaPBH], [NgayYeuCau], [MaSP], [MoTaLoi], [TinhTrangXuLy]) VALUES ('PBH003', '19/06/2022', 'SP003', N'Lỗi dây sạc', 'Đã xong')
 
--- Bảng giỏ hàng
-SET DATEFORMAT DMY
-INSERT [dbo].[GioHang] ([MaGH], [MaKH], [ThoiGianThemVaoGio]) VALUES ('GH001', 'KH001','20/04/2022')
-INSERT [dbo].[GioHang] ([MaGH], [MaKH], [ThoiGianThemVaoGio]) VALUES ('GH002', 'KH002','19/04/2022')
-INSERT [dbo].[GioHang] ([MaGH], [MaKH], [ThoiGianThemVaoGio]) VALUES ('GH003', 'KH003','10/04/2022')
+--Bảng Sản phầm thành phần
+insert into SanPhamThanhPhan values('SP001','LAPTOP001',1)
+insert into SanPhamThanhPhan values('SP001','CHUOT001',1)
+insert into SanPhamThanhPhan values('SP001','PHUKIEN001',1)
+insert into SanPhamThanhPhan values('SP002','LAPTOP002',1)
+insert into SanPhamThanhPhan values('SP003','LAPTOP003',1)
+insert into SanPhamThanhPhan values('SP003','BANPHIM001',1)
 
--- Bảng chi tiết giỏ hàng
-INSERT [dbo].[ChiTietGioHang] ([MaCTGH], [MaGH], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTGH001', 'GH001','SP001', 1, 13490000)
-INSERT [dbo].[ChiTietGioHang] ([MaCTGH], [MaGH], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTGH002', 'GH002','SP001', 1, 15490000)
-INSERT [dbo].[ChiTietGioHang] ([MaCTGH], [MaGH], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTGH003', 'GH003','SP001', 1, 30000000)
+select P.*, PC.TenTP, PPC.SoLuong 
+from SanPham as P
+join SanPhamThanhPhan as PPC on P.MaSP = PPC.MaSP
+join ThanhPhan as PC on PPC.MaTP = PC.MaTP
+where P.MaSP = 'SP001'
 
 
 

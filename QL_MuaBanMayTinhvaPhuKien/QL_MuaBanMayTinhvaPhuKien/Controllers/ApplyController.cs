@@ -13,19 +13,12 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
         private readonly MBDbContext dbContext;
         private readonly IConfiguration _configuration;
         private readonly string _sqlDataSource;
-        //public ApplyController(IConfiguration configuration)
-        //{
-        //    _configuration = configuration;
-        //    _sqlDataSource = _configuration.GetConnectionString("DefaultConnection"); // Lấy chuỗi kết nối từ appsettings.json
-        //}
-        public ApplyController(MBDbContext _dbContext,IConfiguration _configuration)
+        public ApplyController(IConfiguration configuration)
         {
-       
-            this.dbContext = _dbContext;
-            this._configuration = _configuration;
-            _sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
-            //this._sqlDataSource = _sqlDataSource;
+            _configuration = configuration;
+            _sqlDataSource = _configuration.GetConnectionString("DefaultConnection"); // Lấy chuỗi kết nối từ appsettings.json
         }
+
         [HttpGet]
         public IActionResult GetApply()
         {

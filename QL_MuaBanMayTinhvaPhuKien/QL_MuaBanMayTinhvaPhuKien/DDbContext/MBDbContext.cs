@@ -3,9 +3,9 @@ using QL_MuaBanMayTinhvaPhuKien.Model;
 
 namespace QL_MuaBanMayTinhvaPhuKien.DDbContext
 {
-	public class MBDbContext :DbContext
+	public class MBDbContext : DbContext
 	{
-		public MBDbContext(DbContextOptions options): base (options)
+		public MBDbContext(DbContextOptions options) : base(options)
 		{
 		}
 
@@ -21,5 +21,7 @@ namespace QL_MuaBanMayTinhvaPhuKien.DDbContext
 		public DbSet<CungUng> CungUngs { get; set; }
 		public DbSet<HoaDon> HoaDons { get; set; }
 		public DbSet<DonHang> DonHangs { get; set; }
-	}
+		public DbSet<ThanhPhan> ThanhPhans { get; set; }
+        public DbSet<SanPhamThanhPhan> SanPhamThanhPhans { get; set; }
+    }
 }

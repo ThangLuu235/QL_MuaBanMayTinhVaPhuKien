@@ -22,7 +22,8 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 		public IActionResult GetProducts()
 		{
 			List<SanPham> products = new List<SanPham>();
-			string query = "SELECT MaSP, TenSanPham, MoTa, Gia, SoLuongTrongKho, HinhAnh, MaDM, MaThongSo, MaNSX FROM SanPham";
+			string query = "select P.*, PC.TenTP, PPC.SoLuong " +
+				"from SanPham as P join SanPhamThanhPhan as PPC on P.MaSP = PPC.MaSP join ThanhPhan as PC on PPC.MaTP = PC.MaTP\r\n";
 
 			using (SqlConnection sqlConnection = new SqlConnection(_sqlDataSource))
 			{
@@ -37,13 +38,20 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 							{
 								MaSP = sqlDataReader.GetString(0),
 								TenSanPham = sqlDataReader.GetString(1),
-								MoTa = sqlDataReader.GetString(2),
-								Gia = sqlDataReader.GetDecimal(3),
-								SoLuongTrongKho = sqlDataReader.GetInt32(4),
-								HinhAnh = sqlDataReader.GetString(5),
-								MaDM = sqlDataReader.GetString(6),
-								MaThongSo = sqlDataReader.GetString(7),
-								MaNSX = sqlDataReader.GetString(8)
+                                MaDM = sqlDataReader.GetString(3),
+                                MaNSX = sqlDataReader.GetString(2),
+                                MoTa = sqlDataReader.GetString(4),
+								Gia = sqlDataReader.GetDecimal(5),
+								HinhAnh = sqlDataReader.GetString(6),
+								ThanhPhan = new ThanhPhan()
+								{
+									TenTP = sqlDataReader.GetString(7)
+                                },
+								SanPhamThanhPhan = new SanPhamThanhPhan()
+								{
+									SoLuong = sqlDataReader.GetInt32(8)
+                                }
+								
 							};
 							products.Add(product);
 						}
@@ -62,8 +70,8 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 				using (SqlConnection sqlConnection = new SqlConnection(_sqlDataSource))
 				{
 					sqlConnection.Open();
-					string insertQuery = "INSERT INTO SanPham (MaSP, TenSanPham, MoTa, Gia, SoLuongTrongKho, HinhAnh, MaDM, MaThongSo, MaNSX) " +
-						"VALUES (@MaSP, @TenSanPham, @MoTa, @Gia, @SoLuongTrongKho, @HinhAnh, @MaDM, @MaThongSo, @MaNSX)";
+					string insertQuery = "INSERT INTO SanPham (MaSP, TenSanPham, MoTa, Gia, HinhAnh, MaDM, MaNSX) " +
+						"VALUES (@MaSP, @TenSanPham, @MoTa, @Gia, @HinhAnh, @MaDM, @MaNSX)";
 
 					using (SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection))
 					{
@@ -71,10 +79,10 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 						sqlCommand.Parameters.AddWithValue("@TenSanPham", product.TenSanPham);
 						sqlCommand.Parameters.AddWithValue("@MoTa", product.MoTa);
 						sqlCommand.Parameters.AddWithValue("@Gia", product.Gia);
-						sqlCommand.Parameters.AddWithValue("@SoLuongTrongKho", product.SoLuongTrongKho);
+						//sqlCommand.Parameters.AddWithValue("@SoLuongTrongKho", product.SoLuongTrongKho);
 						sqlCommand.Parameters.AddWithValue("@HinhAnh", product.HinhAnh);
 						sqlCommand.Parameters.AddWithValue("@MaDM", product.MaDM);
-						sqlCommand.Parameters.AddWithValue("@MaThongSo", product.MaThongSo);
+						//sqlCommand.Parameters.AddWithValue("@MaThongSo", product.MaThongSo);
 						sqlCommand.Parameters.AddWithValue("@MaNSX", product.MaNSX);
 						sqlCommand.ExecuteNonQuery();
 					}
@@ -91,7 +99,7 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 			{
 				sqlConnection.Open();
 				string updateQuery = "UPDATE SanPham SET TenSanPham = @TenSanPham, MoTa = @MoTa, Gia = @Gia, " +
-					"SoLuongTrongKho = @SoLuongTrongKho, HinhAnh = @HinhAnh, MaDM = @MaDM, MaThongSo = @MaThongSo, MaNSX = @MaNSX " +
+					"HinhAnh = @HinhAnh, MaDM = @MaDM, MaNSX = @MaNSX " +
 					"WHERE MaSP = @MaSP";
 
 				using (SqlCommand sqlCommand = new SqlCommand(updateQuery, sqlConnection))
@@ -100,10 +108,8 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 					sqlCommand.Parameters.AddWithValue("@TenSanPham", product.TenSanPham);
 					sqlCommand.Parameters.AddWithValue("@MoTa", product.MoTa);
 					sqlCommand.Parameters.AddWithValue("@Gia", product.Gia);
-					sqlCommand.Parameters.AddWithValue("@SoLuongTrongKho", product.SoLuongTrongKho);
 					sqlCommand.Parameters.AddWithValue("@HinhAnh", product.HinhAnh);
 					sqlCommand.Parameters.AddWithValue("@MaDM", product.MaDM);
-					sqlCommand.Parameters.AddWithValue("@MaThongSo", product.MaThongSo);
 					sqlCommand.Parameters.AddWithValue("@MaNSX", product.MaNSX);
 					int rowsAffected = sqlCommand.ExecuteNonQuery();
 

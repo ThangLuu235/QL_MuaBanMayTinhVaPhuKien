@@ -22,7 +22,7 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 		public IActionResult GetProductSpecifications()
 		{
 			List<ThongSoSanPham> specs = new List<ThongSoSanPham>();
-			string query = "SELECT MaThongSo, CPU, ManHinh, Ram, DoHoa, LuuTru, HeDieuHanh, Pin, KhoiLuong, Mau, SoSeri, SoLuongTon FROM ThongSoSanPham";
+			string query = "SELECT MaSP, MaThongSo, GiaTriThongSo FROM ThongSoSanPham";
 
 			using (SqlConnection sqlConnection = new SqlConnection(_sqlDataSource))
 			{
@@ -35,19 +35,10 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 						{
 							ThongSoSanPham spec = new ThongSoSanPham
 							{
-								MaThongSo = sqlDataReader.GetString(0),
-								CPU = sqlDataReader.GetString(1),
-								ManHinh = sqlDataReader.GetString(2),
-								Ram = sqlDataReader.GetString(3),
-								DoHoa = sqlDataReader.GetString(4),
-								LuuTru = sqlDataReader.GetString(5),
-								HeDieuHanh = sqlDataReader.GetString(6),
-								Pin = sqlDataReader.GetString(7),
-								KhoiLuong = sqlDataReader.GetString(8),
-								Mau = sqlDataReader.GetString(9),
-								SoSeri = sqlDataReader.GetString(10),
-								SoLuongTon = sqlDataReader.GetInt32(11)
-							};
+								MaSP = sqlDataReader.GetString(0),
+                                MaThongSo = sqlDataReader.GetString(1),
+                                GiaTriThongSo = sqlDataReader.GetString(2),
+                            };
 							specs.Add(spec);
 						}
 					}
@@ -71,17 +62,17 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 					using (SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection))
 					{
 						sqlCommand.Parameters.AddWithValue("@MaThongSo", spec.MaThongSo);
-						sqlCommand.Parameters.AddWithValue("@CPU", spec.CPU);
-						sqlCommand.Parameters.AddWithValue("@ManHinh", spec.ManHinh);
-						sqlCommand.Parameters.AddWithValue("@Ram", spec.Ram);
-						sqlCommand.Parameters.AddWithValue("@DoHoa", spec.DoHoa);
-						sqlCommand.Parameters.AddWithValue("@LuuTru", spec.LuuTru);
-						sqlCommand.Parameters.AddWithValue("@HeDieuHanh", spec.HeDieuHanh);
-						sqlCommand.Parameters.AddWithValue("@Pin", spec.Pin);
-						sqlCommand.Parameters.AddWithValue("@KhoiLuong", spec.KhoiLuong);
-						sqlCommand.Parameters.AddWithValue("@Mau", spec.Mau);
-						sqlCommand.Parameters.AddWithValue("@SoSeri", spec.SoSeri);
-						sqlCommand.Parameters.AddWithValue("@SoLuongTon", spec.SoLuongTon);
+						//sqlCommand.Parameters.AddWithValue("@CPU", spec.CPU);
+						//sqlCommand.Parameters.AddWithValue("@ManHinh", spec.ManHinh);
+						//sqlCommand.Parameters.AddWithValue("@Ram", spec.Ram);
+						//sqlCommand.Parameters.AddWithValue("@DoHoa", spec.DoHoa);
+						//sqlCommand.Parameters.AddWithValue("@LuuTru", spec.LuuTru);
+						//sqlCommand.Parameters.AddWithValue("@HeDieuHanh", spec.HeDieuHanh);
+						//sqlCommand.Parameters.AddWithValue("@Pin", spec.Pin);
+						//sqlCommand.Parameters.AddWithValue("@KhoiLuong", spec.KhoiLuong);
+						//sqlCommand.Parameters.AddWithValue("@Mau", spec.Mau);
+						//sqlCommand.Parameters.AddWithValue("@SoSeri", spec.SoSeri);
+						//sqlCommand.Parameters.AddWithValue("@SoLuongTon", spec.SoLuongTon);
 						sqlCommand.ExecuteNonQuery();
 					}
 				}
@@ -104,17 +95,17 @@ namespace QL_MuaBanMayTinhvaPhuKien.Controllers
 				using (SqlCommand sqlCommand = new SqlCommand(updateQuery, sqlConnection))
 				{
 					sqlCommand.Parameters.AddWithValue("@MaThongSo", maThongSo);
-					sqlCommand.Parameters.AddWithValue("@CPU", spec.CPU);
-					sqlCommand.Parameters.AddWithValue("@ManHinh", spec.ManHinh);
-					sqlCommand.Parameters.AddWithValue("@Ram", spec.Ram);
-					sqlCommand.Parameters.AddWithValue("@DoHoa", spec.DoHoa);
-					sqlCommand.Parameters.AddWithValue("@LuuTru", spec.LuuTru);
-					sqlCommand.Parameters.AddWithValue("@HeDieuHanh", spec.HeDieuHanh);
-					sqlCommand.Parameters.AddWithValue("@Pin", spec.Pin);
-					sqlCommand.Parameters.AddWithValue("@KhoiLuong", spec.KhoiLuong);
-					sqlCommand.Parameters.AddWithValue("@Mau", spec.Mau);
-					sqlCommand.Parameters.AddWithValue("@SoSeri", spec.SoSeri);
-					sqlCommand.Parameters.AddWithValue("@SoLuongTon", spec.SoLuongTon);
+					//sqlCommand.Parameters.AddWithValue("@CPU", spec.CPU);
+					//sqlCommand.Parameters.AddWithValue("@ManHinh", spec.ManHinh);
+					//sqlCommand.Parameters.AddWithValue("@Ram", spec.Ram);
+					//sqlCommand.Parameters.AddWithValue("@DoHoa", spec.DoHoa);
+					//sqlCommand.Parameters.AddWithValue("@LuuTru", spec.LuuTru);
+					//sqlCommand.Parameters.AddWithValue("@HeDieuHanh", spec.HeDieuHanh);
+					//sqlCommand.Parameters.AddWithValue("@Pin", spec.Pin);
+					//sqlCommand.Parameters.AddWithValue("@KhoiLuong", spec.KhoiLuong);
+					//sqlCommand.Parameters.AddWithValue("@Mau", spec.Mau);
+					//sqlCommand.Parameters.AddWithValue("@SoSeri", spec.SoSeri);
+					//sqlCommand.Parameters.AddWithValue("@SoLuongTon", spec.SoLuongTon);
 					int rowsAffected = sqlCommand.ExecuteNonQuery();
 
 					if (rowsAffected > 0)
