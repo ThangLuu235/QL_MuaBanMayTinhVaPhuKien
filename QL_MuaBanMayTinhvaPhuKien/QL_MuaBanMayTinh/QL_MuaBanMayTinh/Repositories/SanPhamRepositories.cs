@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using QL_MuaBanMayTinh.Data;
+using QL_MuaBanMayTinh.IRepositories;
 using QL_MuaBanMayTinh.Models;
 using System.Formats.Asn1;
 using System.Text.RegularExpressions;

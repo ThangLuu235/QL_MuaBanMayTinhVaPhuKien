@@ -265,62 +265,60 @@ INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKh
 INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKhau], [MaChucVu]) VALUES ('NV002', N'Nguyễn Văn Thông', N'TP.HCM', '0387652014', 'thongthai@gmail.com', '12345678N', 'CVBH')
 INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKhau], [MaChucVu]) VALUES ('NV003', N'Trần Hoàng Lâm', N'TP.HCM', '0878952074', 'lamhoang@gmail.com', '12345678N', 'CVK')
 
+-- Bảng hoá đơn
+SET DATEFORMAT DMY
+INSERT HoaDon VALUES ('HD001', '14/05/2022', '20/05/2022', 13490000, N'Thẻ tín dụng', 'KH001')
+INSERT HoaDon VALUES ('HD002', '14/06/2022', '20/06/2022',13490000, N'Tiền mặt','KH001')
+INSERT HoaDon VALUES ('HD003', '21/06/2022', '21/06/2022',13490000,  N'Thẻ tín dụng', 'KH001')
 -- Bảng tình trạng thanh toán
 SET DATEFORMAT DMY
-INSERT [dbo].[TinhTrangThanhToan] ([MaTinhTrangTT], [MaNV], [DatHang], [XacNhanDonHang], [NgayThanhToan], [TinhTrang], [GiaoHang]) VALUES ('TT001', 'NV002', N'Đã đặt hàng', N'Đã xác nhận', '14/05/2022', N'Đã Thanh Toán', N'Đã giao')
-INSERT [dbo].[TinhTrangThanhToan] ([MaTinhTrangTT], [MaNV], [DatHang], [XacNhanDonHang], [NgayThanhToan], [TinhTrang], [GiaoHang]) VALUES ('TT002', 'NV002', N'Đã đặt hàng', N'Đã xác nhận', '14/06/2022', N'Đã Thanh Toán', N'Đã giao')
-INSERT [dbo].[TinhTrangThanhToan] ([MaTinhTrangTT], [MaNV], [DatHang], [XacNhanDonHang], [NgayThanhToan], [TinhTrang], [GiaoHang]) VALUES ('TT003', 'NV002', N'Đã đặt hàng', N'Đã xác nhận', '21/06/2022', N'Đã Thanh Toán', N'Đã giao')
+INSERT TinhTrangThanhToan VALUES ('TT001',  N'Đã đặt hàng', N'Đã xác nhận', '14/05/2022',N'Đã Nhận hàng','NV002','HD001', N'Đã Thanh Toán')
+INSERT TinhTrangThanhToan VALUES ('TT002', N'Đã đặt hàng', N'Đã xác nhận', '14/06/2022',N'Đã Nhận hàng', 'NV002','HD002', N'Đã Thanh Toán')
+INSERT TinhTrangThanhToan VALUES ('TT003', N'Đã đặt hàng', N'Đã xác nhận', '21/06/2022',N'Đã Nhận hàng','NV002','HD003', N'Đã Thanh Toán')
 
 -- Bảng khách hàng
 SET DATEFORMAT DMY
-INSERT [dbo].[KhachHang] ([MaKH], [TenKhachHang], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH001', N'Trần Ngọc Đài', N'Nữ', '16/01/2001', N'TP.HCM', '0247896547', 'daingoctran@gmail.com')
-INSERT [dbo].[KhachHang] ([MaKH], [TenKhachHang], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH002', N'Nguyễn Thị Bích Thuỷ', N'Nữ', '26/12/2012', N'TP.HCM', '0847896547', 'bichthuy@gmail.com')
-INSERT [dbo].[KhachHang] ([MaKH], [TenKhachHang], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH003', N'Đào Văn Lưu', N'Nam', '18/11/1999', N'TP.HCM', '0247896790', 'cyberfort@gmail.com')
+INSERT [dbo].[KhachHang] ([MaKH], [TenKH], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH001', N'Trần Ngọc Đài', N'Nữ', '16/01/2001', N'TP.HCM', '0247896547', 'daingoctran@gmail.com')
+INSERT [dbo].[KhachHang] ([MaKH], [TenKH], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH002', N'Nguyễn Thị Bích Thuỷ', N'Nữ', '26/12/2012', N'TP.HCM', '0847896547', 'bichthuy@gmail.com')
+INSERT [dbo].[KhachHang] ([MaKH], [TenKH], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH003', N'Đào Văn Lưu', N'Nam', '18/11/1999', N'TP.HCM', '0247896790', 'cyberfort@gmail.com')
 
 -- Bảng khuyến mãi
-INSERT [dbo].[KhuyenMai] ([MaKhuyenMai], [MaSP], [TenKhuyenMai], [PhanTramGiamGia]) VALUES ('KM001', 'SP002', N'Kỷ niệm ngày thành lập', 8.88)
+set dateformat DMY
+INSERT KhuyenMai VALUES ('KM001', N'Kỷ niệm ngày thành lập',10, '12/12/2022','12/01/2023')
+select * from KhuyenMai
 
--- Bảng hoá đơn
-SET DATEFORMAT DMY
-INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [HinhThucThanhToan], [MaTinhTrangTT], [NgayNhanHang]) VALUES ('HD001', '14/05/2022', 'KH001', 13490000, N'Thẻ tín dụng', 'TT001', '20/05/2022')
-INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [HinhThucThanhToan], [MaTinhTrangTT], [NgayNhanHang]) VALUES ('HD002', '14/06/2022', 'KH001', 13490000, N'Tiền mặt', 'TT002', '20/06/2022')
-INSERT [dbo].[HoaDon] ([MaHD], [NgayMua], [MaKH], [TongTien], [HinhThucThanhToan], [MaTinhTrangTT], [NgayNhanHang]) VALUES ('HD003', '21/06/2022', 'KH001', 13490000, N'Thẻ tín dụng', 'TT003', '21/06/2022')
 
 -- Bảng chi tiết hoá dơn
-INSERT [dbo].[ChiTietHoaDon] ([MaCTHD], [MaHD], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTHD001', 'HD001', 'SP001', 1, 13490000)
-INSERT [dbo].[ChiTietHoaDon] ([MaCTHD], [MaHD], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTHD002', 'HD002', 'SP002', 1, 15490000)
-INSERT [dbo].[ChiTietHoaDon] ([MaCTHD], [MaHD], [MaSP], [SoLuong], [GiaBan]) VALUES ('CTHD003', 'HD003', 'SP003', 1, 30000000)
+INSERT ChiTietHoaDon VALUES ( 'HD001', 'SP001', 1, 13490000)
+INSERT ChiTietHoaDon VALUES ( 'HD002', 'SP002', 1, 15490000)
+INSERT ChiTietHoaDon VALUES ( 'HD003', 'SP003', 1, 30000000)
 
 -- Bảng nhà cung cấp
-INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNhaCungCap], [DiaChi], [DienThoai]) VALUES ('NCC001', N'Công Ty Phân Phối A', N'TP.HCM', '0287896244')
-INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNhaCungCap], [DiaChi], [DienThoai]) VALUES ('NCC002', N'Công Ty Điện Tử', N'Hà Nội', '0287896250')
-INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNhaCungCap], [DiaChi], [DienThoai]) VALUES ('NCC003', N'Công Ty Cung Cấp Máy Tính', N'TP.HCM', '0287996290')
+INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNCC], [DiaChi], [DienThoai]) VALUES ('NCC001', N'Công Ty Phân Phối A', N'TP.HCM', '0287896244')
+INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNCC], [DiaChi], [DienThoai]) VALUES ('NCC002', N'Công Ty Điện Tử', N'Hà Nội', '0287896250')
+INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNCC], [DiaChi], [DienThoai]) VALUES ('NCC003', N'Công Ty Cung Cấp Máy Tính', N'TP.HCM', '0287996290')
 
 -- Bảng cung ứng
-SET DATEFORMAT DMY
-INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaTP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG001','NCC001', 'LAPTOP001', 20, 13490000, '20/02/2022', '03/03/2022')
-INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaTP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG002','NCC002', 'LAPTOP002', 20, 15490000, '20/02/2022', '01/03/2022')
-INSERT [dbo].[CungUng] ([MaCungUng], [MaNCC], [MaTP], [SoLuong], [GiaBan], [NgayDatHang], [NgayGiaoHang]) VALUES ('CUNG003','NCC003', 'LAPTOP003', 20, 30000000, '20/02/2022', '09/03/2022')
 
 -- Bảng đơn đặt hàng
 SET DATEFORMAT DMY
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDatHang], [MaNhaCungCap]) VALUES ('DDH001', '20/02/2022', 'NCC001')
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDatHang], [MaNhaCungCap]) VALUES ('DDH002', '20/02/2022', 'NCC002')
-INSERT [dbo].[DonDatHang] ([MaDDH], [NgayDatHang], [MaNhaCungCap]) VALUES ('DDH003', '20/02/2022', 'NCC003')
+INSERT [dbo].[DonNhapHang] ([MaDNH], [MaNCC], [NgayDat]) VALUES ('DDH001', 'NCC001', '20/02/2022')
+INSERT [dbo].[DonNhapHang] ([MaDNH], [MaNCC], [NgayDat]) VALUES ('DDH002',  'NCC002', '20/02/2022')
+INSERT [dbo].[DonNhapHang] ([MaDNH], [MaNCC], [NgayDat]) VALUES ('DDH003', 'NCC003', '20/02/2022')
 
 -- Bảng chi tiết đơn đăt hàng
-INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaTP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH001', 'DDH001', 'LAPTOP001', 20, 13000000)
-INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaTP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH002', 'DDH002', 'LAPTOP002', 20, 15000000)
-INSERT [dbo].[ChiTietDonDatHang] ([MaCTDDH], [MaDDH], [MaTP], [SoLuongDat], [GiaDat]) VALUES ('CTDDH003', 'DDH003', 'LAPTOP003', 20, 29000000)
+INSERT [dbo].[ChiTietDonNhapHang] ( [MaDDH], [MaTP], [SoLuong], [Gia]) VALUES ( 'DDH001', 'LAPTOP001', 20, 13000000)
+INSERT [dbo].[ChiTietDonNhapHang] ([MaDDH], [MaTP], [SoLuong], [Gia]) VALUES ('DDH002', 'LAPTOP002', 20, 15000000)
+INSERT [dbo].[ChiTietDonNhapHang] ( [MaDDH], [MaTP], [SoLuong], [Gia]) VALUES ( 'DDH003', 'LAPTOP003', 20, 29000000)
 
 
 --Bảng Sản phầm thành phần
-insert into SanPhamThanhPhan values('SP001','LAPTOP001',1)
-insert into SanPhamThanhPhan values('SP001','CHUOT001',1)
-insert into SanPhamThanhPhan values('SP001','PHUKIEN001',1)
-insert into SanPhamThanhPhan values('SP002','LAPTOP002',1)
-insert into SanPhamThanhPhan values('SP003','LAPTOP003',1)
-insert into SanPhamThanhPhan values('SP003','BANPHIM001',1)
+insert into SanPhamThanhPhan values('LAPTOP001','SP001',1)
+insert into SanPhamThanhPhan values('CHUOT001','SP001',1)
+insert into SanPhamThanhPhan values('PHUKIEN001','SP001',1)
+insert into SanPhamThanhPhan values('LAPTOP002','SP002',1)
+insert into SanPhamThanhPhan values('LAPTOP003','SP003',1)
+insert into SanPhamThanhPhan values('BANPHIM001','SP003',1)
 
 select P.*, PC.TenTP, PPC.SoLuong 
 from SanPham as P

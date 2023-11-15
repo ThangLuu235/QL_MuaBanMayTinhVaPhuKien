@@ -17,6 +17,7 @@ namespace QL_MuaBanMayTinh.Data
         public string? HinhAnh { get; set; }
 
         public ICollection<SanPhamThanhPhan> SanPhamThanhPhans { get; set; }
+        public ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }  
         public SanPham()
         {
             SanPhamThanhPhans = new List<SanPhamThanhPhan>();

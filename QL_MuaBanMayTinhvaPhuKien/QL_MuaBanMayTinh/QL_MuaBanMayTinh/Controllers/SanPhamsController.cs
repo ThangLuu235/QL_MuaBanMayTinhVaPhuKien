@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using QL_MuaBanMayTinh.IRepositories;
 using QL_MuaBanMayTinh.Models;
-using QL_MuaBanMayTinh.Repositories;
 
 namespace QL_MuaBanMayTinh.Controllers
 {

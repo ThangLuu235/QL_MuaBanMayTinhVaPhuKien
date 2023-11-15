@@ -18,9 +18,12 @@ namespace QL_MuaBanMayTinh.Data
         public string? MaDM { get; set; }
         public DanhMucSanPham DanhMucSanPham { get; set; }
         public ICollection<SanPhamThanhPhan> SanPhamThanhPhans { get; set; }
+        public ICollection<ThongSoSanPham> ThongSoSanPhams { get; set; }
+        public ICollection<ChiTietDonNhapHang> ChiTietDonNhapHangs { get; set; }
         public ThanhPhan()
         {
             SanPhamThanhPhans = new List<SanPhamThanhPhan>();
         }
+
     }
 }
