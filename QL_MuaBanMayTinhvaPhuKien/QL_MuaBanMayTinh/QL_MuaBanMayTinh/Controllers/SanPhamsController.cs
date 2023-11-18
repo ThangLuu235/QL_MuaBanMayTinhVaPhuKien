@@ -14,15 +14,25 @@ namespace QL_MuaBanMayTinh.Controllers
         public SanPhamsController(ISanPhamRepositories repo) { 
             _sanPhamRepo=repo;
         }
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllSanPhams()
+        //{
+        //    try
+        //    {
+        //        return Ok(await _sanPhamRepo.GetAllSanPham());
+        //    }
+        //    catch (Exception ex) { return BadRequest(); }
+        //}
         [HttpGet]
         public async Task<IActionResult> GetAllSanPhams()
         {
             try
             {
-                return Ok(await _sanPhamRepo.GetAllSanPham());
+                return Ok(await _sanPhamRepo.GetAllCTSanPham());
             }
-            catch(Exception ex) { return BadRequest(); }
+            catch (Exception ex) { return BadRequest(); }
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSanPhamById(string id)
         {
