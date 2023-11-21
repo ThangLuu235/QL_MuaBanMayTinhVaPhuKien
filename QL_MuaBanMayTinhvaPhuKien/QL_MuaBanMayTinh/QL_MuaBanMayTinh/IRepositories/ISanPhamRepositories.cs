@@ -11,5 +11,8 @@ namespace QL_MuaBanMayTinh.IRepositories
         public Task UpdateSanPham(string id, SanPhamModel model);
         public Task DeleteSanPham(string id);
         public Task<List<CTSanPham>> GetAllCTSanPham();
+        public Task<List<CTSanPham>> GetCTSanPham(string search);
+        public Task<List<CTSanPham>> SortSanPhams(string sort);
+        public Task<List<CTSanPham>> GetAllCTSanPhamTheoGia(decimal? from, decimal? to);
     }
 }

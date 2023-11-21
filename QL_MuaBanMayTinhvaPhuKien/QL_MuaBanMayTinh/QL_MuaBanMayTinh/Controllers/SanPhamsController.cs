@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QL_MuaBanMayTinh.IRepositories;
 using QL_MuaBanMayTinh.Models;
@@ -32,11 +33,28 @@ namespace QL_MuaBanMayTinh.Controllers
             }
             catch (Exception ex) { return BadRequest(); }
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSanPhamById(string id)
+        [HttpGet("{from},{to}")]
+        public async Task<IActionResult> GetAllSanPhamsTheoGia(decimal? from, decimal? to)
         {
-            var sanpham = await _sanPhamRepo.GetSanPham(id);
+            try
+            {
+                return Ok(await _sanPhamRepo.GetAllCTSanPhamTheoGia(from,to));
+            }
+            catch (Exception ex) { return BadRequest(); }
+        }
+        [HttpGet("{sort}")]
+        public async Task<IActionResult> SortSanPham(string sort)
+        {
+            try
+            {
+                return Ok(await _sanPhamRepo.SortSanPhams(sort));
+            }
+            catch (Exception ex) { return BadRequest(); }
+        }
+        [HttpGet("sanphambyname /{name}")]
+        public async Task<IActionResult> GetSanPhamByName(string name)
+        {
+            var sanpham = await _sanPhamRepo.GetCTSanPham(name);
             return sanpham == null ? NotFound() : Ok(sanpham);
         }
         [HttpPost]
