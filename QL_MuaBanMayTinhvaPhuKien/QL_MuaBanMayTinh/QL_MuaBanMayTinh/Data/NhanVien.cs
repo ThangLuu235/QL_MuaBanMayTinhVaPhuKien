@@ -16,9 +16,11 @@ namespace QL_MuaBanMayTinh.Data
         public string? MaChucVu { get; set; }
         public ChucVu ChucVu { get; set; }
         public ICollection<TinhTrangThanhToan> TinhTrangThanhToans { get; set; }
+        public ICollection<DonNhapHang> DonNhapHangs { get; set; }
         public NhanVien()
         {
             TinhTrangThanhToans = new List<TinhTrangThanhToan>();
+            DonNhapHangs= new List<DonNhapHang>();
         }
     }
 }

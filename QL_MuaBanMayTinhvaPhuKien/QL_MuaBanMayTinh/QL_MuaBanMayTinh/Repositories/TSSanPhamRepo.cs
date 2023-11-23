@@ -21,12 +21,12 @@ namespace QL_MuaBanMayTinh.Repositories
             var newSanPham = _mapper.Map<ThongSoSanPham>(model);
             _context.ThongSoSanPhams!.Add(newSanPham);
             await _context.SaveChangesAsync();
-            return newSanPham.MaTP + newSanPham.MaThongSo;
+            return newSanPham.MaSP + newSanPham.MaThongSo;
         }
 
         public async Task DeleteTSSanPham(string matp, string mats)
         {
-            var delete = _context.ThongSoSanPhams!.SingleOrDefault(sp => sp.MaTP == matp && sp.MaThongSo == mats);
+            var delete = _context.ThongSoSanPhams!.SingleOrDefault(sp => sp.MaSP == matp && sp.MaThongSo == mats);
             if (delete != null)
             {
                 _context.ThongSoSanPhams!.Remove(delete);
@@ -43,7 +43,7 @@ namespace QL_MuaBanMayTinh.Repositories
         public async Task<TSSanPhamModel> GetTSSanPham(string matp, string mats)
         {
             var sanpham = await _context.ThongSoSanPhams!
-            .Where(sp => sp.MaTP == matp && sp.MaThongSo == mats)
+            .Where(sp => sp.MaSP == matp && sp.MaThongSo == mats)
             .FirstOrDefaultAsync();
             return _mapper.Map<TSSanPhamModel>(sanpham);
         }

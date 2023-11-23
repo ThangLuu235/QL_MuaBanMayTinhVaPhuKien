@@ -5,10 +5,10 @@ namespace QL_MuaBanMayTinh.Data
     
     public class ThongSoSanPham
     {
-        public string? MaTP { get; set; }
+        public string? MaSP { get; set; }
         public string? MaThongSo { get; set; }
         public string? GiaTriThongSo { get; set; }
-        public ThanhPhan ThanhPhan { get; set; }
+        public SanPham SanPham { get; set; }
         public ThongSoKyThuat ThongSoKyThuat { get; set; }
     }
 }

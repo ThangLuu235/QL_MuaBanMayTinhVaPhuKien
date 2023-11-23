@@ -10,7 +10,9 @@ namespace QL_MuaBanMayTinh.Data
         public string? MaDNH { get; set; }
         public string? MaNCC { get; set; }
         public DateTime NgayDat { get; set; }
+        public string? MaNV { get; set; }
         public NhaCungCap NhaCungCap { get; set; }
+        public NhanVien NhanVien { get; set; }
         public ICollection<ChiTietDonNhapHang> ChiTietDonNhapHangs { get; set; }    
         public DonNhapHang()
         {

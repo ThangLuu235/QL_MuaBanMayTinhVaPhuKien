@@ -29,7 +29,7 @@ namespace QL_MuaBanMayTinh.Controllers
         {
             try
             {
-                return Ok(await _sanPhamRepo.GetAllCTSanPham());
+                return Ok(await _sanPhamRepo.GetAllSanPham());
             }
             catch (Exception ex) { return BadRequest(); }
         }

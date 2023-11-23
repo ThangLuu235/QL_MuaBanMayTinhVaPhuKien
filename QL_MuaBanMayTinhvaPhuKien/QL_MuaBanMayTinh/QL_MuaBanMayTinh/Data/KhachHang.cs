@@ -14,6 +14,7 @@ namespace QL_MuaBanMayTinh.Data
         public string? DiaChi { get; set; }
         public string? DienThoai { get; set; }
         public string? Email { get; set; }
+        public string? MatKhau { get; set; }
         public ICollection<HoaDon> HoaDons { get; set; }
         public KhachHang() { 
             HoaDons = new List<HoaDon>();

@@ -8,7 +8,11 @@ namespace QL_MuaBanMayTinh.Data
         public string MaKhuyenMai { get; set; }
         public string TenKhuyenMai { get;set; }
         public int PhanTramGiamGia { get; set; }
-        public DateTime NgayBD { get; set; }    
-        public DateTime NgayKT { get; set; }
+
+        public ICollection<HoaDon> HoaDons { get; set; }
+        public KhuyenMai()
+        {
+            HoaDons = new List<HoaDon>();
+        }
     }
 }

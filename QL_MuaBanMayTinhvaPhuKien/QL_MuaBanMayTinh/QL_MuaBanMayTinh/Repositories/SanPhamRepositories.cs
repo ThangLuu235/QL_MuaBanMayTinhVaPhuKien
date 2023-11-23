@@ -51,14 +51,15 @@ namespace QL_MuaBanMayTinh.Repositories
                             MoTa = sp.MoTa,
                             Gia = sp.Gia,
                             HinhAnh = sp.HinhAnh,
+                            SoSeri = sp.SoSeri,
+                            MaDM=sp.MaDM,
                             ThanhPhanCT = new List<ThanhPhanCT>
                             {
                                 new ThanhPhanCT
                                 {
                                     MaTP = tp.MaTP,
                                     TenTP = tp.TenTP,
-                                    SoSeri = tp.SoSeri,
-                                    GiaTP = tp.GiaTP
+
                                 }
                             },
                             SPTPCT = new List<SPTPCT>
@@ -72,7 +73,7 @@ namespace QL_MuaBanMayTinh.Repositories
                             }
                         };
 
-            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh })
+            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh,q.SoSeri,q.MaDM })
                              .Select(group => new CTSanPham
                              {
                                  MaSP = group.Key.MaSP,
@@ -80,6 +81,8 @@ namespace QL_MuaBanMayTinh.Repositories
                                  MoTa = group.Key.MoTa,
                                  Gia = group.Key.Gia,
                                  HinhAnh = group.Key.HinhAnh,
+                                 SoSeri = group.Key.SoSeri,
+                                 MaDM = group.Key.MaDM,
                                  ThanhPhanCT = group.Select(g => g.ThanhPhanCT[0]).ToList(),
                                  SPTPCT = group.Select(g => g.SPTPCT[0]).ToList()
                              });
@@ -100,14 +103,15 @@ namespace QL_MuaBanMayTinh.Repositories
                             MoTa = sp.MoTa,
                             Gia = sp.Gia,
                             HinhAnh = sp.HinhAnh,
+                            SoSeri= sp.SoSeri,
+                            MaDM=sp.MaDM,
                             ThanhPhanCT = new List<ThanhPhanCT>
                             {
                                 new ThanhPhanCT
                                 {
                                     MaTP = tp.MaTP,
                                     TenTP = tp.TenTP,
-                                    SoSeri = tp.SoSeri,
-                                    GiaTP = tp.GiaTP
+
                                 }
                             },
                             SPTPCT = new List<SPTPCT>
@@ -131,7 +135,7 @@ namespace QL_MuaBanMayTinh.Repositories
                 query = query.Where(sp => sp.Gia <= to.Value);
             }
             query = query.OrderBy(sp => sp.Gia);
-            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh })
+            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh,q.SoSeri,q.MaDM })
                              .Select(group => new CTSanPham
                              {
                                  MaSP = group.Key.MaSP,
@@ -139,6 +143,8 @@ namespace QL_MuaBanMayTinh.Repositories
                                  MoTa = group.Key.MoTa,
                                  Gia = group.Key.Gia,
                                  HinhAnh = group.Key.HinhAnh,
+                                 SoSeri = group.Key.SoSeri,
+                                 MaDM = group.Key.MaDM,
                                  ThanhPhanCT = group.Select(g => g.ThanhPhanCT[0]).ToList(),
                                  SPTPCT = group.Select(g => g.SPTPCT[0]).ToList()
                              });
@@ -168,14 +174,15 @@ namespace QL_MuaBanMayTinh.Repositories
                             MoTa = sp.MoTa,
                             Gia = sp.Gia,
                             HinhAnh = sp.HinhAnh,
+                            SoSeri=sp.SoSeri,
+                            MaDM=sp.MaDM,
                             ThanhPhanCT = new List<ThanhPhanCT>
                             {
                                 new ThanhPhanCT
                                 {
                                     MaTP = tp.MaTP,
                                     TenTP = tp.TenTP,
-                                    SoSeri = tp.SoSeri,
-                                    GiaTP = tp.GiaTP
+
                                 }
                             },
                             SPTPCT = new List<SPTPCT>
@@ -189,7 +196,7 @@ namespace QL_MuaBanMayTinh.Repositories
                             }
                         };
 
-            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh })
+            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh,q.SoSeri,q.MaDM })
                              .Select(group => new CTSanPham
                              {
                                  MaSP = group.Key.MaSP,
@@ -197,6 +204,8 @@ namespace QL_MuaBanMayTinh.Repositories
                                  MoTa = group.Key.MoTa,
                                  Gia = group.Key.Gia,
                                  HinhAnh = group.Key.HinhAnh,
+                                 SoSeri = group.Key.SoSeri,
+                                 MaDM = group.Key.MaDM,
                                  ThanhPhanCT = group.Select(g => g.ThanhPhanCT[0]).ToList(),
                                  SPTPCT = group.Select(g => g.SPTPCT[0]).ToList()
                              });
@@ -223,14 +232,15 @@ namespace QL_MuaBanMayTinh.Repositories
                             MoTa = sp.MoTa,
                             Gia = sp.Gia,
                             HinhAnh = sp.HinhAnh,
+                            SoSeri=sp.SoSeri,
+                            MaDM=sp.MaDM,
                             ThanhPhanCT = new List<ThanhPhanCT>
                             {
                                 new ThanhPhanCT
                                 {
                                     MaTP = tp.MaTP,
                                     TenTP = tp.TenTP,
-                                    SoSeri = tp.SoSeri,
-                                    GiaTP = tp.GiaTP
+
                                 }
                             },
                             SPTPCT = new List<SPTPCT>
@@ -245,7 +255,7 @@ namespace QL_MuaBanMayTinh.Repositories
                         };
             
 
-            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh })
+            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh ,q.SoSeri,q.MaDM})
                              .Select(group => new CTSanPham
                              {
                                  MaSP = group.Key.MaSP,
@@ -253,6 +263,8 @@ namespace QL_MuaBanMayTinh.Repositories
                                  MoTa = group.Key.MoTa,
                                  Gia = group.Key.Gia,
                                  HinhAnh = group.Key.HinhAnh,
+                                 SoSeri = group.Key.SoSeri,
+                                 MaDM = group.Key.MaDM,
                                  ThanhPhanCT = group.Select(g => g.ThanhPhanCT[0]).ToList(),
                                  SPTPCT = group.Select(g => g.SPTPCT[0]).ToList()
                              });

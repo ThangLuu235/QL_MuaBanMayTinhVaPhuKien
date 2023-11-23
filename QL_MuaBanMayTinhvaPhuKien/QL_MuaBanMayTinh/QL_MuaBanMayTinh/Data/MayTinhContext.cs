@@ -33,6 +33,16 @@ namespace QL_MuaBanMayTinh.Data
                 e.ToTable("DanhMucSanPham");
                 e.HasKey(dm => dm.MaDM);
             });
+            modelBuilder.Entity<SanPham>(e =>
+            {
+                e.ToTable("SanPham");
+                e.HasKey(sp => sp.MaSP);
+
+                 e.HasOne(d => d.DanhMucSanPham)
+                .WithMany(d => d.SanPhams)
+                .HasForeignKey(d => d.MaDM)
+                .HasConstraintName("FK_TP_DMSP");
+            });
             modelBuilder.Entity<ChucVu>(e =>
             {
                 e.ToTable("ChucVu");
@@ -62,6 +72,11 @@ namespace QL_MuaBanMayTinh.Data
                 .WithMany(kh => kh.HoaDons)
                 .HasForeignKey(kh => kh.MaKH)
                 .HasConstraintName("FK_HD_KH");
+
+                e.HasOne(kh => kh.KhuyenMai)
+                .WithMany(kh => kh.HoaDons)
+                .HasForeignKey(kh => kh.MaKM)
+                .HasConstraintName("FK_HD_KM");
 
 
             });
@@ -101,31 +116,32 @@ namespace QL_MuaBanMayTinh.Data
                 .WithMany(ncc => ncc.DonNhapHangs)
                 .HasForeignKey(ncc => ncc.MaNCC)
                 .HasConstraintName("FK_DNC_NCC");
+
+                e.HasOne(kh => kh.NhanVien)
+                .WithMany(kh => kh.DonNhapHangs)
+                .HasForeignKey(kh => kh.MaNV)
+                .HasConstraintName("FK_DNH_NV");
             });
             modelBuilder.Entity<ChiTietDonNhapHang>(e =>
             {
                 e.ToTable("ChiTietDonNhapHang");
-                e.HasKey(ct => new { ct.MaDDH, ct.MaTP });
+                e.HasKey(ct => new { ct.MaDDH, ct.MaSP });
 
                 e.HasOne(dnh => dnh.DonNhapHang)
                 .WithMany(dnh => dnh.ChiTietDonNhapHangs)
                 .HasForeignKey(dnh => dnh.MaDDH)
-                .HasForeignKey("FK_CTDNH_DNH");
+                .HasConstraintName("FK_CTDNH_DNH");
 
-                e.HasOne(tp => tp.ThanhPhan)
+                e.HasOne(tp => tp.SanPham)
                 .WithMany(tp => tp.ChiTietDonNhapHangs)
-                .HasForeignKey(tp => tp.MaTP).HasConstraintName("FK_CTDNH_TP");
+                .HasForeignKey(tp => tp.MaSP)
+                .HasConstraintName("FK_CTDNH_TP");
             });
             
             modelBuilder.Entity<ThanhPhan>(e =>
             {
                 e.ToTable("ThanhPhan");
                 e.HasKey(tp => tp.MaTP);
-
-                e.HasOne(d => d.DanhMucSanPham)
-                .WithMany(d => d.ThanhPhans)
-                .HasForeignKey(d => d.MaDM)
-                .HasConstraintName("FK_TP_DMSP");
                 
             });
             modelBuilder.Entity<ChiTietHoaDon>(e =>
@@ -164,11 +180,11 @@ namespace QL_MuaBanMayTinh.Data
             });
             modelBuilder.Entity<ThongSoSanPham>(e => {
                 e.ToTable("ThongSoSanPham");
-                e.HasKey(e=> new {e.MaThongSo, e.MaTP});
+                e.HasKey(e=> new {e.MaThongSo, e.MaSP});
 
-                e.HasOne(e => e.ThanhPhan)
+                e.HasOne(e => e.SanPham)
                 .WithMany(e => e.ThongSoSanPhams)
-                .HasForeignKey(e => e.MaTP)
+                .HasForeignKey(e => e.MaSP)
                 .HasConstraintName("FK_SP_TSSP");
 
                 e.HasOne(e => e.ThongSoKyThuat)

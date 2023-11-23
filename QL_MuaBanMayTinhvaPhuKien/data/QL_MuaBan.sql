@@ -228,9 +228,9 @@ INSERT [dbo].[DanhMucSanPham] ([MaDM], [TenDanhMuc]) VALUES ('DM003', N'Phụ ki
 --INSERT [dbo].[NhaSanXuat] ([MaNSX], [TenNhaSanXuat], [DiaChi], [DienThoai]) VALUES ('NSX03', N'Nhà sản xuất DELL', N'TP.HCM', N'02856978895')
 select * from SanPham
 -- Bảng sản phẩm
-INSERT [dbo].[SanPham] ([MaSP], [TenSanPham],  [MoTa], [Gia], [HinhAnh]) VALUES ('SP001', N'Laptop ASUS Vivobook Go 15', N'Asus VivoBook Go 15 siêu mỏng nhẹ', 13490000, N'Anh1')
-INSERT [dbo].[SanPham] ([MaSP], [TenSanPham],  [MoTa], [Gia],  [HinhAnh]) VALUES ('SP002', N'Laptop ACER Aspire 3 A315-59-51X8', N'Siêu Nhanh', 15490000, N'Anh2')
-INSERT [dbo].[SanPham] ([MaSP], [TenSanPham],  [MoTa], [Gia],  [HinhAnh]) VALUES ('SP003', N'Laptop Dell Vostro 3530', N'Siêu nhẹ, siêu mỏng', 30000000, N'Anh3')
+INSERT SanPham VALUES ('SP001', N'Laptop ASUS Vivobook Go 15', N'Asus VivoBook Go 15 siêu mỏng nhẹ', 13490000, N'Anh1','DM001','LAP-AS-VI-123123')
+INSERT SanPham VALUES ('SP002', N'Laptop ACER Aspire 3 A315-59-51X8', N'Siêu Nhanh', 15490000, N'Anh2','DM001','LAP-AC-AS-565423')
+INSERT SanPham VALUES ('SP003', N'Laptop Dell Vostro 3530', N'Siêu nhẹ, siêu mỏng', 30000000, N'Anh3','DM001','LAP-DE-VO-342645')
 
 -- Bảng Thông số kỹ thuật
 INSERT [dbo].[ThongSoKyThuat] ([MaThongSo], [TenThongSo]) VALUES ('TS01', N'CPU')
@@ -238,22 +238,22 @@ INSERT [dbo].[ThongSoKyThuat] ([MaThongSo], [TenThongSo]) VALUES ('TS02', N'Màn
 INSERT [dbo].[ThongSoKyThuat] ([MaThongSo], [TenThongSo]) VALUES ('TS03', N'RAM')
 
 --Bảng thành phần
-insert into ThanhPhan values ('LAPTOP001',N'Laptop ASUS Vivobook Go 15',30,'LAP-AS-VI-123123',13000000,'DM001')
-insert into ThanhPhan values ('LAPTOP002',N'Laptop ACER Aspire 3 A315-59-51X8',40,'LAP-AC-AS-565423',15000000,'DM001')
-insert into ThanhPhan values ('LAPTOP003',N'Laptop Dell Vostro 3530',50,'LAP-DE-VO-342645',29000000,'DM001')
-insert into ThanhPhan values ('CHUOT001',N'Chuột Logitech B100',200,'MOU-LO-938421',100000,'DM003')
-insert into ThanhPhan values ('BANPHIM001',N'Bàn phím HP',100,'KEY-HP-389231',200000,'DM003')
-insert into ThanhPhan values ('PHUKIEN001',N'Bao chống sốc laptop',500,'PK-38892',50000,'DM003')
+insert into ThanhPhan values ('LAPTOP001',N'Laptop ASUS Vivobook Go 15',30)
+insert into ThanhPhan values ('LAPTOP002',N'Laptop ACER Aspire 3 A315-59-51X8',40)
+insert into ThanhPhan values ('LAPTOP003',N'Laptop Dell Vostro 3530',50)
+insert into ThanhPhan values ('CHUOT001',N'Chuột Logitech B100',200)
+insert into ThanhPhan values ('BANPHIM001',N'Bàn phím HP',100)
+insert into ThanhPhan values ('PHUKIEN001',N'Bao chống sốc laptop',500)
 -- Bảng Thông số - sản phẩm
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP001', 'TS01', N'AMD Ryzen 5 7520U')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP001', 'TS02', N'15.6" (1920 x 1080)')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP001', 'TS03', N'16GB Onboard LPDDR5 5500MHz')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP002', 'TS01', N'Intel Core i5-1235U')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP002', 'TS02', N'15.6" (1920 x 1080)')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP002', 'TS03', N'1 x 8GB DDR4 2400MHz')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP003', 'TS01', N'Intel Core i5-1335U')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP003', 'TS02', N'15.6" WVA (1920 x 1080),120Hz')
-INSERT [dbo].[ThongSoSanPham] ([MaTP], [MaThongSo], [GiaTriThongSo]) VALUES ('LAPTOP003', 'TS03', N'1 x 8GB DDR4 2666MHz')
+INSERT ThongSoSanPham VALUES ('SP001', 'TS01', N'AMD Ryzen 5 7520U')
+INSERT ThongSoSanPham VALUES ('SP001', 'TS02', N'15.6" (1920 x 1080)')
+INSERT ThongSoSanPham VALUES ('SP001', 'TS03', N'16GB Onboard LPDDR5 5500MHz')
+INSERT ThongSoSanPham VALUES ('SP002', 'TS01', N'Intel Core i5-1235U')
+INSERT ThongSoSanPham VALUES ('SP002', 'TS02', N'15.6" (1920 x 1080)')
+INSERT ThongSoSanPham VALUES ('SP002', 'TS03', N'1 x 8GB DDR4 2400MHz')
+INSERT ThongSoSanPham VALUES ('SP003', 'TS01', N'Intel Core i5-1335U')
+INSERT ThongSoSanPham VALUES ('SP003', 'TS02', N'15.6" WVA (1920 x 1080),120Hz')
+INSERT ThongSoSanPham VALUES ('SP003', 'TS03', N'1 x 8GB DDR4 2666MHz')
 
 -- Bảng chức vụ
 INSERT [dbo].[ChucVu] ([MaChucVu], [TenChucVu]) VALUES ('CVBH', N'Nhân viên bán hàng')
@@ -267,14 +267,14 @@ INSERT [dbo].[NhanVien] ([MaNV], [HoTen], [DiaChi], [DienThoai], [Email], [MatKh
 
 -- Bảng hoá đơn
 SET DATEFORMAT DMY
-INSERT HoaDon VALUES ('HD001', '14/05/2022', '20/05/2022', 13490000, N'Thẻ tín dụng', 'KH001')
-INSERT HoaDon VALUES ('HD002', '14/06/2022', '20/06/2022',13490000, N'Tiền mặt','KH001')
-INSERT HoaDon VALUES ('HD003', '21/06/2022', '21/06/2022',13490000,  N'Thẻ tín dụng', 'KH001')
+INSERT HoaDon VALUES ('HD001', '14/05/2022', '20/05/2022', 13490000, N'Thẻ tín dụng', 'KH001',NULL,'16/05/2022',3000000)
+INSERT HoaDon VALUES ('HD002', '14/06/2022', '20/06/2022',13490000, N'Tiền mặt','KH001',NULL,'15/06/2022',2000000)
+INSERT HoaDon VALUES ('HD003', '21/06/2022', '21/06/2022',13490000,  N'Thẻ tín dụng', 'KH001',NULL,'21/06/2022',13490000)
 -- Bảng tình trạng thanh toán
 SET DATEFORMAT DMY
-INSERT TinhTrangThanhToan VALUES ('TT001',  N'Đã đặt hàng', N'Đã xác nhận', '14/05/2022',N'Đã Nhận hàng','NV002','HD001', N'Đã Thanh Toán')
-INSERT TinhTrangThanhToan VALUES ('TT002', N'Đã đặt hàng', N'Đã xác nhận', '14/06/2022',N'Đã Nhận hàng', 'NV002','HD002', N'Đã Thanh Toán')
-INSERT TinhTrangThanhToan VALUES ('TT003', N'Đã đặt hàng', N'Đã xác nhận', '21/06/2022',N'Đã Nhận hàng','NV002','HD003', N'Đã Thanh Toán')
+INSERT TinhTrangThanhToan VALUES ('TT001',   N'Đã xác nhận', '14/05/2022',N'Đã Nhận hàng','NV002','HD001', N'Đã Thanh Toán')
+INSERT TinhTrangThanhToan VALUES ('TT002', N'Đã xác nhận', '14/06/2022',N'Đã Nhận hàng', 'NV002','HD002', N'Đã Thanh Toán')
+INSERT TinhTrangThanhToan VALUES ('TT003',  N'Đã xác nhận', '21/06/2022',N'Đã Nhận hàng','NV002','HD003', N'Đã Thanh Toán')
 
 -- Bảng khách hàng
 SET DATEFORMAT DMY
@@ -283,9 +283,9 @@ INSERT [dbo].[KhachHang] ([MaKH], [TenKH], [GioiTinh], [NgaySinh], [DiaChi], [Di
 INSERT [dbo].[KhachHang] ([MaKH], [TenKH], [GioiTinh], [NgaySinh], [DiaChi], [DienThoai], [Email]) VALUES ('KH003', N'Đào Văn Lưu', N'Nam', '18/11/1999', N'TP.HCM', '0247896790', 'cyberfort@gmail.com')
 
 -- Bảng khuyến mãi
-set dateformat DMY
-INSERT KhuyenMai VALUES ('KM001', N'Kỷ niệm ngày thành lập',10, '12/12/2022','12/01/2023')
-select * from KhuyenMai
+
+INSERT KhuyenMai VALUES ('KM001', N'Khuyến mãi thành viên',10)
+
 
 
 -- Bảng chi tiết hoá dơn
@@ -302,14 +302,14 @@ INSERT [dbo].[NhaCungCap] ([MaNCC], [TenNCC], [DiaChi], [DienThoai]) VALUES ('NC
 
 -- Bảng đơn đặt hàng
 SET DATEFORMAT DMY
-INSERT [dbo].[DonNhapHang] ([MaDNH], [MaNCC], [NgayDat]) VALUES ('DDH001', 'NCC001', '20/02/2022')
-INSERT [dbo].[DonNhapHang] ([MaDNH], [MaNCC], [NgayDat]) VALUES ('DDH002',  'NCC002', '20/02/2022')
-INSERT [dbo].[DonNhapHang] ([MaDNH], [MaNCC], [NgayDat]) VALUES ('DDH003', 'NCC003', '20/02/2022')
+INSERT into DonNhapHang VALUES ('DDH001', 'NCC001', '20/02/2022','NV001')
+INSERT into DonNhapHang VALUES ('DDH002',  'NCC002', '20/02/2022','NV001')
+INSERT into DonNhapHang VALUES ('DDH003', 'NCC003', '20/02/2022','NV001')
 
 -- Bảng chi tiết đơn đăt hàng
-INSERT [dbo].[ChiTietDonNhapHang] ( [MaDDH], [MaTP], [SoLuong], [Gia]) VALUES ( 'DDH001', 'LAPTOP001', 20, 13000000)
-INSERT [dbo].[ChiTietDonNhapHang] ([MaDDH], [MaTP], [SoLuong], [Gia]) VALUES ('DDH002', 'LAPTOP002', 20, 15000000)
-INSERT [dbo].[ChiTietDonNhapHang] ( [MaDDH], [MaTP], [SoLuong], [Gia]) VALUES ( 'DDH003', 'LAPTOP003', 20, 29000000)
+INSERT into ChiTietDonNhapHang VALUES ( 'DDH001', 'SP001', 20, 13000000)
+INSERT into ChiTietDonNhapHang VALUES ('DDH002', 'SP002', 20, 15000000)
+INSERT into ChiTietDonNhapHang VALUES ( 'DDH003', 'SP003', 20, 29000000)
 
 
 --Bảng Sản phầm thành phần

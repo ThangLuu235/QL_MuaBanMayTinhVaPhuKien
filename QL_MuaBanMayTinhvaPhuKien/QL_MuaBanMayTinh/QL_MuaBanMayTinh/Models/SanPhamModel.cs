@@ -13,6 +13,8 @@ namespace QL_MuaBanMayTinh.Models
         [Range(0, int.MaxValue)]
         public decimal Gia { get; set; }
         public string? HinhAnh { get; set; }
+        public string? SoSeri { get; set; }
+        public string? MaDM { get; set; }
     }
     public class CTSanPham
     {
@@ -22,6 +24,8 @@ namespace QL_MuaBanMayTinh.Models
         public string? MoTa { get; set; }
         public decimal Gia { get; set; }
         public string? HinhAnh { get; set; }
+        public string? SoSeri { get; set; }
+        public string? MaDM { get; set; }
         public List<ThanhPhanCT> ThanhPhanCT { get; set; }
         public List<SPTPCT> SPTPCT { get; set; }
 
@@ -37,7 +41,6 @@ namespace QL_MuaBanMayTinh.Models
         public ThanhPhanCT() { }
         public string? MaTP { get; set; }
         public string? TenTP { get; set; }
-        public string? SoSeri { get; set; }
-        public decimal GiaTP { get; set; }
+
     }
 }

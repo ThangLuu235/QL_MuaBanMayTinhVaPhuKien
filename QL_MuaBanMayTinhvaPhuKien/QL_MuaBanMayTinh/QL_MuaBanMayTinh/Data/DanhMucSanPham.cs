@@ -10,10 +10,10 @@ namespace QL_MuaBanMayTinh.Data
         [Key]
         public string MaDM { get; set; } // khóa chính
         public string TenDanhMuc { get; set; }
-        public ICollection<ThanhPhan> ThanhPhans { get; set; }
+        public ICollection<SanPham> SanPhams { get; set; }
         public DanhMucSanPham()
         {
-            ThanhPhans= new List<ThanhPhan>();
+            SanPhams = new List<SanPham>();
         }
     }
 }

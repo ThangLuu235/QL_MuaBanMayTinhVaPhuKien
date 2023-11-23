@@ -14,6 +14,10 @@ namespace QL_MuaBanMayTinh.Data
         public int TongTien { get; set; }
         public string? HinhThucThanhToan { get; set; }
         public string? MaKH { get; set; }
+        public decimal TienDatCoc { get; set; }
+        public DateTime NgayThanhToan { get; set; }
+        public string? MaKM { get; set; }
+        public KhuyenMai KhuyenMai { get; set; }
         public KhachHang KhachHang { get; set; }
         public ICollection<TinhTrangThanhToan> TinhTrangThanhToans { get; set; }
 
@@ -21,6 +25,7 @@ namespace QL_MuaBanMayTinh.Data
         public HoaDon()
         {
             ChiTietHoaDons = new List<ChiTietHoaDon>();
+            TinhTrangThanhToans = new List<TinhTrangThanhToan>();
         }
     }
 }
