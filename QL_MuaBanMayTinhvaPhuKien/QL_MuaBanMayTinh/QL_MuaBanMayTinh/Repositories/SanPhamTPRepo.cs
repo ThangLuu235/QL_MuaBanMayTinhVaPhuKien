@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using QL_MuaBanMayTinh.Data;
 using QL_MuaBanMayTinh.IRepositories;
 using QL_MuaBanMayTinh.Models;
+using System;
 
 namespace QL_MuaBanMayTinh.Repositories
 {
@@ -45,6 +46,14 @@ namespace QL_MuaBanMayTinh.Repositories
             var sanpham = await _context.SanPhamThanhPhans!
             .Where(sp => sp.MaSP == masp && sp.MaTP == matp)
             .FirstOrDefaultAsync();
+            return _mapper.Map<SanPhamThanhPhamModel>(sanpham);
+        }
+
+        public async Task<SanPhamThanhPhamModel> GetSPTPtheoSP(string masp)
+        {
+            var sanpham = await _context.SanPhamThanhPhans!
+           .Where(sp => sp.MaSP == masp)
+           .FirstOrDefaultAsync();
             return _mapper.Map<SanPhamThanhPhamModel>(sanpham);
         }
 
