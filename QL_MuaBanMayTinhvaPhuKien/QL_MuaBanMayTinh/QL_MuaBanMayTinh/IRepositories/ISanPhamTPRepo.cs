@@ -6,7 +6,8 @@ namespace QL_MuaBanMayTinh.IRepositories
     {
         public Task<List<SanPhamThanhPhamModel>> GetAllSPTP();
         public Task<SanPhamThanhPhamModel> GetSPTP(string masp, string matp);
-        public Task<SanPhamThanhPhamModel> GetSPTPtheoSP(string masp);
+        public Task<List<SanPhamThanhPhamModel>> GetSPTPtheoSP(string masp);
+        public Task<List<SanPhamThanhPhamModel>> GetSPTPtheoTP(string matp);
         public Task<string> AddSPTP(SanPhamThanhPhamModel model);
         public Task UpdateSPTP(string masp, string matp, SanPhamThanhPhamModel model);
         public Task DeleteSPTP(string masp, string matp);

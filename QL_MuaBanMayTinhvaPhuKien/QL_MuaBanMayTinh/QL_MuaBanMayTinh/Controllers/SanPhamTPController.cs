@@ -16,7 +16,7 @@ namespace QL_MuaBanMayTinh.Controllers
             _SanPhamTP = repo;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllDanhMucSPs()
+        public async Task<IActionResult> GetAllSanPhamTPs()
         {
             try
             {
@@ -25,9 +25,21 @@ namespace QL_MuaBanMayTinh.Controllers
             catch (Exception ex) { return BadRequest(); }
         }
         [HttpGet("{masp},{matp}")]
-        public async Task<IActionResult> GetDanhMucSPById(string masp,string matp)
+        public async Task<IActionResult> GetSanPhamTPById(string masp,string matp)
         {
             var sanpham = await _SanPhamTP.GetSPTP(masp,matp);
+            return sanpham == null ? NotFound() : Ok(sanpham);
+        }
+        [HttpGet("SPTPByIdSP/{masp}")]
+        public async Task<IActionResult> GetSanPhamTPByIdSP(string masp)
+        {
+            var sanpham = await _SanPhamTP.GetSPTPtheoSP(masp);
+            return sanpham == null ? NotFound() : Ok(sanpham);
+        }
+        [HttpGet("SPTPByIdTP/{matp}")]
+        public async Task<IActionResult> GetSanPhamTPByIdTP(string matp)
+        {
+            var sanpham = await _SanPhamTP.GetSPTPtheoTP(matp);
             return sanpham == null ? NotFound() : Ok(sanpham);
         }
         [HttpPost]
@@ -36,8 +48,9 @@ namespace QL_MuaBanMayTinh.Controllers
             try
             {
                 var newSPid = await _SanPhamTP.AddSPTP(model);
-                var sp = await _SanPhamTP.GetSPTPtheoSP(newSPid);
-                return sp == null ? NotFound() : Ok(sp);
+                //var sp = await _SanPhamTP.GetSPTPtheoSP(newSPid);
+                //return sp == null ? NotFound() : Ok(sp);
+                return Ok("Thêm thành công");
             }
             catch
             {
@@ -55,7 +68,7 @@ namespace QL_MuaBanMayTinh.Controllers
             await _SanPhamTP.UpdateSPTP(masp,matp, model);
             return Ok("Sửa thành công");
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{masp},{matp}")]
         public async Task<IActionResult> DeleTeSPTP(string masp,string matp)
         {
             try

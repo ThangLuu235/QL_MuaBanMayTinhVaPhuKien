@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QL_MuaBanMayTinh.Data;
 
@@ -11,9 +12,10 @@ using QL_MuaBanMayTinh.Data;
 namespace QL_MuaBanMayTinh.Migrations
 {
     [DbContext(typeof(MayTinhContext))]
-    partial class MayTinhContextModelSnapshot : ModelSnapshot
+    [Migration("20231126171752_Check")]
+    partial class Check
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,6 +125,9 @@ namespace QL_MuaBanMayTinh.Migrations
                     b.Property<string>("MaKH")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("MaKM")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("NgayMua")
                         .HasColumnType("datetime2");
 
@@ -141,6 +146,8 @@ namespace QL_MuaBanMayTinh.Migrations
                     b.HasKey("MaHD");
 
                     b.HasIndex("MaKH");
+
+                    b.HasIndex("MaKM");
 
                     b.ToTable("HoaDon", (string)null);
                 });
@@ -174,6 +181,23 @@ namespace QL_MuaBanMayTinh.Migrations
                     b.HasKey("MaKH");
 
                     b.ToTable("KhachHang", (string)null);
+                });
+
+            modelBuilder.Entity("QL_MuaBanMayTinh.Data.KhuyenMai", b =>
+                {
+                    b.Property<string>("MaKhuyenMai")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("PhanTramGiamGia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenKhuyenMai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaKhuyenMai");
+
+                    b.ToTable("KhuyenMai", (string)null);
                 });
 
             modelBuilder.Entity("QL_MuaBanMayTinh.Data.NhaCungCap", b =>
@@ -414,7 +438,14 @@ namespace QL_MuaBanMayTinh.Migrations
                         .HasForeignKey("MaKH")
                         .HasConstraintName("FK_HD_KH");
 
+                    b.HasOne("QL_MuaBanMayTinh.Data.KhuyenMai", "KhuyenMai")
+                        .WithMany("HoaDons")
+                        .HasForeignKey("MaKM")
+                        .HasConstraintName("FK_HD_KM");
+
                     b.Navigation("KhachHang");
+
+                    b.Navigation("KhuyenMai");
                 });
 
             modelBuilder.Entity("QL_MuaBanMayTinh.Data.NhanVien", b =>
@@ -519,6 +550,11 @@ namespace QL_MuaBanMayTinh.Migrations
                 });
 
             modelBuilder.Entity("QL_MuaBanMayTinh.Data.KhachHang", b =>
+                {
+                    b.Navigation("HoaDons");
+                });
+
+            modelBuilder.Entity("QL_MuaBanMayTinh.Data.KhuyenMai", b =>
                 {
                     b.Navigation("HoaDons");
                 });

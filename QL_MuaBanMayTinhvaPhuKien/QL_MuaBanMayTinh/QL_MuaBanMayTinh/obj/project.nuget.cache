@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7dHKsnGTR4yLVZNBva9zbwBn9jXq5iS1dLNaUWYpTI2W4PlvxG1TobNSuFiDHYQm8J6D7N2xUH0IryKO+tGxvg==",
+  "dgSpecHash": "+mh1JCQ/y7km+HQIHQDFg3nwUELRUwJ0CVtsXhGMPE8ASSrHOaHwQQmHilB0fJdQkP5me6fuce8D6V55d3VWtw==",
   "success": true,
-  "projectFilePath": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj",
+  "projectFilePath": "D:\\hk1 nam4\\doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

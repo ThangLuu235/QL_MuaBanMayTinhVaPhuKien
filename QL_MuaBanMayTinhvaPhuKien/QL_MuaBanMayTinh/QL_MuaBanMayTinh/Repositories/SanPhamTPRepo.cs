@@ -27,7 +27,7 @@ namespace QL_MuaBanMayTinh.Repositories
 
         public async Task DeleteSPTP(string masp, string matp)
         {
-            var delete = _context.SanPhamThanhPhans!.SingleOrDefault(sp => sp.MaSP == masp && sp.MaTP==matp);
+            var delete = _context.SanPhamThanhPhans!.SingleOrDefault(sp => sp.MaSP == masp && sp.MaTP == matp);
             if (delete != null)
             {
                 _context.SanPhamThanhPhans!.Remove(delete);
@@ -49,17 +49,25 @@ namespace QL_MuaBanMayTinh.Repositories
             return _mapper.Map<SanPhamThanhPhamModel>(sanpham);
         }
 
-        public async Task<SanPhamThanhPhamModel> GetSPTPtheoSP(string masp)
+        public async Task<List<SanPhamThanhPhamModel>> GetSPTPtheoSP(string masp)
         {
             var sanpham = await _context.SanPhamThanhPhans!
            .Where(sp => sp.MaSP == masp)
-           .FirstOrDefaultAsync();
-            return _mapper.Map<SanPhamThanhPhamModel>(sanpham);
+           .ToListAsync();
+            return _mapper.Map<List<SanPhamThanhPhamModel>>(sanpham);
+        }
+
+        public async Task<List<SanPhamThanhPhamModel>> GetSPTPtheoTP(string matp)
+        {
+            var sanpham = await _context.SanPhamThanhPhans!
+           .Where(sp => sp.MaTP == matp)
+           .ToListAsync();
+            return _mapper.Map<List<SanPhamThanhPhamModel>>(sanpham);
         }
 
         public async Task UpdateSPTP(string masp, string matp, SanPhamThanhPhamModel model)
         {
-            if (masp == model.MaSP && matp==model.MaTP)
+            if (masp == model.MaSP && matp == model.MaTP)
             {
                 var update = _mapper.Map<SanPhamThanhPhan>(model);
                 _context.SanPhamThanhPhans!.Update(update);

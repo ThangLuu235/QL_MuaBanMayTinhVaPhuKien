@@ -20,7 +20,6 @@ namespace QL_MuaBanMayTinh.Helpers
             CreateMap<HoaDon, HoaDonModel>().ReverseMap();
             CreateMap<KhachHang,KhachHangModel>().ReverseMap();
             
-            CreateMap<KhuyenMai,KhuyenMaiModel>().ReverseMap();
             CreateMap<NhaCungCap,NhaCCModel>().ReverseMap();
             CreateMap<NhanVien,NhanVienModel>().ReverseMap();
             CreateMap<ThongSoKyThuat,TSKyThuatModel>().ReverseMap();

@@ -48,9 +48,25 @@ namespace QL_MuaBanMayTinh.Repositories
             return _mapper.Map<TSSanPhamModel>(sanpham);
         }
 
+        public async Task<List<TSSanPhamModel>> GetTSSanPhamByIdSP(string masp)
+        {
+            var sanpham = await _context.ThongSoSanPhams!
+            .Where(sp => sp.MaSP == masp)
+            .ToListAsync();
+            return _mapper.Map<List<TSSanPhamModel>>(sanpham);
+        }
+
+        public async Task<List<TSSanPhamModel>> GetTSSanPhamByIdThongSo(string mats)
+        {
+            var sanpham = await _context.ThongSoSanPhams!
+           .Where(sp => sp.MaThongSo == mats)
+           .ToListAsync();
+            return _mapper.Map<List<TSSanPhamModel>>(sanpham);
+        }
+
         public async Task UpdateTSSanPham(string matp, string mats, TSSanPhamModel model)
         {
-            if (matp == model.MaTP && mats == model.MaThongSo)
+            if (matp == model.MaSP && mats == model.MaThongSo)
             {
                 var update = _mapper.Map<ThongSoSanPham>(model);
                 _context.ThongSoSanPhams!.Update(update);

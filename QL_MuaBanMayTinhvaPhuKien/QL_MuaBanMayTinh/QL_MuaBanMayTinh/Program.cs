@@ -26,7 +26,7 @@ builder.Services.AddScoped<IDanhMucSPRepo, DanhMucSPRepo>();
 builder.Services.AddScoped<IDonNhapHang, DonNhapHangRepo>();
 builder.Services.AddScoped<IHoaDon, HoaDonRepo>();
 builder.Services.AddScoped<IKhachHang, KhachHangRepo>();
-builder.Services.AddScoped<IKhuyenMai, KhuyenMaiRepo>();
+
 builder.Services.AddScoped<INhaCC, NhaCCRepo>();
 builder.Services.AddScoped<INhanVien, NhanVienRepo>();
 builder.Services.AddScoped<ISanPhamTPRepo, SanPhamTPRepo>();
@@ -45,9 +45,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseCors();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

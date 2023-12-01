@@ -38,6 +38,7 @@ namespace QL_MuaBanMayTinh.Controllers
                 var newSPid = await _khachHangRepo.AddKhachHang(model);
                 var sp = await _khachHangRepo.GetKhachHang(newSPid);
                 return sp == null ? NotFound() : Ok(sp);
+
             }
             catch
             {

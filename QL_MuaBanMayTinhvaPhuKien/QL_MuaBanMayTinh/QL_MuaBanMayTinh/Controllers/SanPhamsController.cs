@@ -57,6 +57,12 @@ namespace QL_MuaBanMayTinh.Controllers
             var sanpham = await _sanPhamRepo.GetCTSanPham(name);
             return sanpham == null ? NotFound() : Ok(sanpham);
         }
+        [HttpGet("sanphambyid /{id}")]
+        public async Task<IActionResult> GetSanPhamByID(string id)
+        {
+            var sanpham = await _sanPhamRepo.GetCTSanPhamID(id);
+            return sanpham == null ? NotFound() : Ok(sanpham);
+        }
         [HttpPost]
         public async Task<IActionResult> AddNewSanPham(SanPhamModel model)
         {
@@ -72,6 +78,7 @@ namespace QL_MuaBanMayTinh.Controllers
             }
             
         }
+
         [HttpPut("{id}")]
         public async Task <IActionResult> UpdateSanPham(string id, SanPhamModel model)
         {

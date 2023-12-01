@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj": {}
+    "D:\\hk1 nam4\\doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj": {}
   },
   "projects": {
-    "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj": {
+    "D:\\hk1 nam4\\doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj",
+        "projectUniqueName": "D:\\hk1 nam4\\doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj",
         "projectName": "QL_MuaBanMayTinh",
-        "projectPath": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj",
+        "projectPath": "D:\\hk1 nam4\\doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\hk1 nam4\\doanchuyennganh\\doan\\QL_MuaBanMayTinhVaPhuKien\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\obj\\",
+        "outputPath": "D:\\hk1 nam4\\doanchuyennganh\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhVaPhuKien-main\\QL_MuaBanMayTinhvaPhuKien\\QL_MuaBanMayTinh\\QL_MuaBanMayTinh\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

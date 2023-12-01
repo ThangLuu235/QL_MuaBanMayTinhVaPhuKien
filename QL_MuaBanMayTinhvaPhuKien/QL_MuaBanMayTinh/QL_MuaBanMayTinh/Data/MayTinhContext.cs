@@ -23,7 +23,7 @@ namespace QL_MuaBanMayTinh.Data
         public DbSet<ChiTietDonNhapHang> ChiTietDonNhapHangs { get; set; }
         public DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         
-        public DbSet<KhuyenMai> KhuyenMais { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,11 +48,7 @@ namespace QL_MuaBanMayTinh.Data
                 e.ToTable("ChucVu");
                 e.HasKey(cv => cv.MaChucVu);
             });
-            modelBuilder.Entity<KhuyenMai>(e =>
-            {
-                e.ToTable("KhuyenMai");
-                e.HasKey(km => km.MaKhuyenMai);
-            });
+
             modelBuilder.Entity<NhanVien>(e =>
             {
                 e.ToTable("NhanVien");
@@ -73,10 +69,6 @@ namespace QL_MuaBanMayTinh.Data
                 .HasForeignKey(kh => kh.MaKH)
                 .HasConstraintName("FK_HD_KH");
 
-                e.HasOne(kh => kh.KhuyenMai)
-                .WithMany(kh => kh.HoaDons)
-                .HasForeignKey(kh => kh.MaKM)
-                .HasConstraintName("FK_HD_KM");
 
 
             });

@@ -213,6 +213,60 @@ namespace QL_MuaBanMayTinh.Repositories
             return await groupedResults.ToListAsync();
         }
 
+        public async Task<List<CTSanPham>> GetCTSanPhamID(string search)
+        {
+            var query = from sp in _context.SanPhams
+                        join sptp in _context.SanPhamThanhPhans on sp.MaSP equals sptp.MaSP
+                        join tp in _context.ThanhPhans on sptp.MaTP equals tp.MaTP
+
+                        where string.IsNullOrEmpty(search) || sp.MaSP==search
+                        // CTSanPham nằm trong SanPhamModel
+                        select new CTSanPham
+                        {
+                            MaSP = sp.MaSP,
+                            TenSanPham = sp.TenSanPham,
+                            MoTa = sp.MoTa,
+                            Gia = sp.Gia,
+                            HinhAnh = sp.HinhAnh,
+                            SoSeri = sp.SoSeri,
+                            MaDM = sp.MaDM,
+                            ThanhPhanCT = new List<ThanhPhanCT>
+                            {
+                                new ThanhPhanCT
+                                {
+                                    MaTP = tp.MaTP,
+                                    TenTP = tp.TenTP,
+
+                                }
+                            },
+                            SPTPCT = new List<SPTPCT>
+                            {
+                                new SPTPCT
+                                {
+                                    MaSP = sp.MaSP,
+                                    MaTP = tp.MaTP,
+                                    SoLuong = sptp.SoLuong
+                                }
+                            }
+                        };
+
+            var groupedResults = query.GroupBy(q => new { q.MaSP, q.TenSanPham, q.MoTa, q.Gia, q.HinhAnh, q.SoSeri, q.MaDM })
+                             .Select(group => new CTSanPham
+                             {
+                                 MaSP = group.Key.MaSP,
+                                 TenSanPham = group.Key.TenSanPham,
+                                 MoTa = group.Key.MoTa,
+                                 Gia = group.Key.Gia,
+                                 HinhAnh = group.Key.HinhAnh,
+                                 SoSeri = group.Key.SoSeri,
+                                 MaDM = group.Key.MaDM,
+                                 ThanhPhanCT = group.Select(g => g.ThanhPhanCT[0]).ToList(),
+                                 SPTPCT = group.Select(g => g.SPTPCT[0]).ToList()
+                             });
+
+            return await groupedResults.ToListAsync();
+        }
+
         public async Task<SanPhamModel> GetSanPham(string id)
         {
             var sanpham = await _context.SanPhams!.FindAsync(id);

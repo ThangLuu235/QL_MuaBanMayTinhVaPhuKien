@@ -16,8 +16,6 @@ namespace QL_MuaBanMayTinh.Data
         public string? MaKH { get; set; }
         public decimal TienDatCoc { get; set; }
         public DateTime NgayThanhToan { get; set; }
-        public string? MaKM { get; set; }
-        public KhuyenMai KhuyenMai { get; set; }
         public KhachHang KhachHang { get; set; }
         public ICollection<TinhTrangThanhToan> TinhTrangThanhToans { get; set; }
 
